@@ -5,39 +5,66 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - 我的 ASP.NET 应用程序</title>
-    @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/flat")
+
 </head>
-<body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
+<body style="border:none; margin:0 0 0 0">
+
+    <div class="navbar navbar-fixed-top">
+        <div class="container-fluid">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("应用程序名称", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("Maraton Business", "index", "home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("主页", "Index", "Home")</li>
-                    <li>@Html.ActionLink("关于", "About", "Home")</li>
-                    <li>@Html.ActionLink("联系方式", "Contact", "Home")</li>
+                    @*<li>@Html.ActionLink("任务", "Index", "Home")</li>
+                    <li>@Html.ActionLink("执行器", "About", "Home")</li>
+                    <li>@Html.ActionLink("模板", "Contact", "Home")</li>*@
                 </ul>
             </div>
         </div>
     </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - 我的 ASP.NET 应用程序</p>
-        </footer>
+
+    <div class=".container-fluid body-content">
+        <div class="row">
+            <div class="col-md-2">
+                <div class="list-group">
+                    <a href="/" class="list-group-item active">
+                        Features
+                    </a>
+                    <a href="@Url.Action("index", "Task")" class="list-group-item">Task</a>
+                    <a href="@Url.Action("index","Servant")" class="list-group-item">Servant</a>
+                    <a href="@Url.Action("index","Template")" class="list-group-item">Template</a>
+                </div>
+            </div>
+
+            <div class="col-md-10">
+                @RenderBody()
+            </div>
+        </div>
     </div>
+
+    <footer>
+        <div class="container">
+            <div class="row" style="height:130px">
+                <div class="col-lg-12">
+                    <p>&copy; @DateTime.Now.Year - 我的 ASP.NET 应用程序</p>
+                </div>
+            </div>
+        </div>
+    </footer>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/angular")
     @RenderSection("scripts", required: false)
+
 </body>
 </html>

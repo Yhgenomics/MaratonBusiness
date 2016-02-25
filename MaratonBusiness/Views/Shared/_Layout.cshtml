@@ -9,6 +9,12 @@
     @Styles.Render("~/Content/css")
     @Styles.Render("~/Content/flat")
 
+    <link href="~/Content/font-awesome.min.css" rel="stylesheet" />
+    <!--[if IE 7]>
+    <link href="~/Content/font-awesome-ie7.min.css" rel="stylesheet" />
+    <![endif]-->
+
+
 </head>
 <body style="border:none; margin:0 0 0 0">
 
@@ -40,8 +46,8 @@
                         Features
                     </a>
                     <a href="@Url.Action("index", "Task")" class="list-group-item">Task</a>
-                    <a href="@Url.Action("index","Servant")" class="list-group-item">Servant</a>
-                    <a href="@Url.Action("index","Template")" class="list-group-item">Template</a>
+                    <a href="@Url.Action("index", "Servant")" class="list-group-item">Servant</a>
+                    <a href="@Url.Action("index", "Template")" class="list-group-item">Template</a>
                 </div>
             </div>
 

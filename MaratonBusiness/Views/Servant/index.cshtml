@@ -3,7 +3,11 @@
     ViewBag.Title = "index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
- 
+<ol class="breadcrumb">
+    <li><a href="/">Home</a></li>
+    <li><a href="@Url.Action("index","Servant")">Servant</a></li>
+</ol>
+<hr />
 <div class="row">
     <div class="col-lg-12">
         <table class="table table-hover">

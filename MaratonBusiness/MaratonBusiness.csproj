@@ -132,12 +132,17 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Code\MDB.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ServantController.cs" />
     <Compile Include="Controllers\TaskController.cs" />
+    <Compile Include="Controllers\TemplateController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\DbModel.cs" />
+    <Compile Include="Models\DbStep.cs" />
+    <Compile Include="Models\DbTemplate.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -145,7 +150,12 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\flat-ui.css" />
     <Content Include="Content\flat-ui.min.css" />
+    <Content Include="Content\font-awesome-ie7.css" />
+    <Content Include="Content\font-awesome-ie7.min.css" />
+    <Content Include="Content\font-awesome.css" />
+    <Content Include="Content\font-awesome.min.css" />
     <Content Include="favicon.ico" />
+    <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -190,6 +200,10 @@
     <Content Include="Scripts\angular-aria.min.js.map" />
     <Content Include="Scripts\angular-animate.min.js.map" />
     <Content Include="Content\flat-ui.css.map" />
+    <Content Include="fonts\fontawesome-webfont.eot" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\FontAwesome.otf" />
     <None Include="Properties\PublishProfiles\Public.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\flat-ui.js" />
@@ -966,6 +980,9 @@
     <Content Include="Scripts\version.json" />
     <Content Include="Views\Task\index.cshtml" />
     <Content Include="Views\Servant\index.cshtml" />
+    <Content Include="Views\Template\index.cshtml" />
+    <Content Include="Views\Template\edit.cshtml" />
+    <Content Include="Views\Template\create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -973,7 +990,6 @@
     <Folder Include="Images\icons\" />
     <Folder Include="Images\login\" />
     <Folder Include="Images\tile\" />
-    <Folder Include="Models\" />
     <Folder Include="Scripts\vendor\" />
   </ItemGroup>
   <ItemGroup>

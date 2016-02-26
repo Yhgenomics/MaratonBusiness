@@ -136,13 +136,13 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ServantController.cs" />
     <Compile Include="Controllers\TaskController.cs" />
-    <Compile Include="Controllers\TemplateController.cs" />
+    <Compile Include="Controllers\PipeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\DbModel.cs" />
     <Compile Include="Models\DbStep.cs" />
-    <Compile Include="Models\DbTemplate.cs" />
+    <Compile Include="Models\DbPipe.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -980,9 +980,9 @@
     <Content Include="Scripts\version.json" />
     <Content Include="Views\Task\index.cshtml" />
     <Content Include="Views\Servant\index.cshtml" />
-    <Content Include="Views\Template\index.cshtml" />
-    <Content Include="Views\Template\edit.cshtml" />
-    <Content Include="Views\Template\create.cshtml" />
+    <Content Include="Views\Pipe\index.cshtml" />
+    <Content Include="Views\Pipe\edit.cshtml" />
+    <Content Include="Views\Pipe\create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

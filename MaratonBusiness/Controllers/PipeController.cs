@@ -9,14 +9,14 @@ using MongoDB.Driver;
 
 namespace MaratonBusiness.Controllers
 {
-    public class TemplateController : Controller
+    public class PipeController : Controller
     {
         // GET: Template
         public ActionResult index()
         {
             using (MDB mdb = new MDB())
             {
-                var dbt = mdb.Document<DbTemplate>().Find(x => true).ToCursor().ToList();
+                var dbt = mdb.Document<DbPipe>().Find(x => true).ToCursor().ToList();
                 return View(dbt);
             }
 
@@ -33,11 +33,11 @@ namespace MaratonBusiness.Controllers
         {
             using (MDB mdb = new MDB())
             {
-                DbTemplate dbt = new DbTemplate();
+                DbPipe dbt = new DbPipe();
                 dbt.Name = form["Name"];
                 dbt.Executor = form["Executor"];
                 dbt.Parameters = form["Parameters"].Split(new string[] { "\r\n","\r","\n" }, StringSplitOptions.RemoveEmptyEntries).ToList();
-                mdb.Document<DbTemplate>().InsertOne(dbt);
+                mdb.Document<DbPipe>().InsertOne(dbt);
             }
 
             return RedirectToAction("index");
@@ -48,7 +48,7 @@ namespace MaratonBusiness.Controllers
         {
             using (MDB mdb = new MDB())
             {
-                var dbt = mdb.Document<DbTemplate>().Find(x => x.Id == id).ToCursor().FirstOrDefault();
+                var dbt = mdb.Document<DbPipe>().Find(x => x.Id == id).ToCursor().FirstOrDefault();
                 return View(dbt);
             }
 
@@ -60,14 +60,14 @@ namespace MaratonBusiness.Controllers
         {
             using (MDB mdb = new MDB())
             {
-                DbTemplate dbt = new DbTemplate();
+                DbPipe dbt = new DbPipe();
                 dbt.Id = form["Id"];
                 dbt.Name = form["Name"];
                 dbt.Executor = form["Executor"];
                 dbt.Parameters = form["Parameters"].Split(new string[] { "\r\n", "\r", "\n" }, StringSplitOptions.RemoveEmptyEntries).ToList();
-                UpdateDefinitionBuilder<DbTemplate> builder = new UpdateDefinitionBuilder<DbTemplate>();
+                UpdateDefinitionBuilder<DbPipe> builder = new UpdateDefinitionBuilder<DbPipe>();
 
-                var t = mdb.UpdateOne<DbTemplate>(x => x.Id == dbt.Id, dbt);
+                var t = mdb.UpdateOne<DbPipe>(x => x.Id == dbt.Id, dbt);
             }
 
             return RedirectToAction("index");
@@ -77,7 +77,7 @@ namespace MaratonBusiness.Controllers
         {
             using (MDB mdb = new MDB())
             {
-                mdb.Document<DbTemplate>().DeleteOne(t => t.Id == id);
+                mdb.Document<DbPipe>().DeleteOne(t => t.Id == id);
             }
 
             return RedirectToAction("index");

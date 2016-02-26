@@ -5,9 +5,9 @@ using System.Web;
 
 namespace MaratonBusiness.Models
 {
-    public class DbTemplate : DbModel
+    public class DbPipe : DbModel
     {
-        public DbTemplate()
+        public DbPipe()
         {
             this.Parameters = new List<string>();
         }

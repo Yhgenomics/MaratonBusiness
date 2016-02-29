@@ -134,6 +134,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Code\MDB.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PipelineController.cs" />
     <Compile Include="Controllers\ServantController.cs" />
     <Compile Include="Controllers\TaskController.cs" />
     <Compile Include="Controllers\PipeController.cs" />
@@ -141,6 +142,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\DbModel.cs" />
+    <Compile Include="Models\DbPipeline.cs" />
     <Compile Include="Models\DbStep.cs" />
     <Compile Include="Models\DbPipe.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -983,6 +985,10 @@
     <Content Include="Views\Pipe\index.cshtml" />
     <Content Include="Views\Pipe\edit.cshtml" />
     <Content Include="Views\Pipe\create.cshtml" />
+    <Content Include="Views\Pipeline\index.cshtml" />
+    <Content Include="Views\Pipeline\create.cshtml" />
+    <Content Include="Views\Pipeline\pipelist.cshtml" />
+    <Content Include="Views\Pipeline\edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,0 +1,104 @@
+﻿@model MaratonBusiness.Models.DbPipeline
+
+@{
+    ViewBag.Title = "create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<ol class="breadcrumb">
+    <li><a href="/">Home</a></li>
+    <li><a href="@Url.Action("index","Pipeline")">Pipeline</a></li>
+    <li><a href="#">Create</a></li>
+</ol>
+<hr />
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        @Html.Hidden("Pipes")
+        <div class="form-group">
+            <span class="control-label col-md-2">Pipe</span>
+            <div class="col-md-4">
+                <div id="pipelist"> 
+                </div>
+                <hr />
+                <a href="#" class="btn btn-success" data-toggle="modal" data-target="#pipeView"><span class="glyphicon glyphicon-plus"></span></a>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-info" />
+            </div>
+        </div>
+    </div>
+}
+
+<div class="modal fade" id="pipeView" tabindex="-1" role="dialog" aria-labelledby="pipeView">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">Pipe Selection</h4>
+            </div>
+            <div id="pipeContent" class="modal-body">
+              
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $("#pipeView").on('show.bs.modal', function (e) {
+            $.get("@Url.Action("pipelist")", null, function (data, status, jxhr) {
+                $("#pipeContent").html(data);
+            });
+        })
+    });
+
+    var pipes = [];
+
+    function addPipe(pipe)
+    {
+        pipes.push(pipe);
+        $("#pipeView").modal("hide");
+        buildPipeTag();
+    }
+
+    function deletePipe(index) {
+        var tmp = [];
+        for (var i = 0; i < pipes.length; i++) {
+            if( i == index )
+            {
+                continue;
+            }
+
+            tmp.push(pipes[i]);
+        }
+
+        pipes = tmp;
+        buildPipeTag();
+    }
+
+    function buildPipeTag()
+    {
+        $("#Pipes").val("");
+        $("#pipelist").html("");
+        for (var i = 0; i < pipes.length; i++) {
+            $("#pipelist").append('<div><span>' + pipes[i].name + '<a href="javascript:deletePipe(' + i + ')"><i class="glyphicon glyphicon-remove"></i></a></span></div>');
+            $("#Pipes").val($("#Pipes").val() + "," + pipes[i].id);
+        }
+    }
+</script>

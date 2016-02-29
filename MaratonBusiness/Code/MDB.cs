@@ -44,6 +44,13 @@ namespace MaratonBusiness.Code
             return doc.DeleteMany(filter).DeletedCount;
         }
 
+        public bool Insert<T>(params T[] instance) where T : DbModel
+        {
+            var doc = this.Document<T>();
+            doc.InsertMany(instance);
+            return true;
+        }
+
         public T UpdateOne<T>(Expression<Func<T, bool>> filter, T instance ) where T : DbModel
         {
             if (instance == null)

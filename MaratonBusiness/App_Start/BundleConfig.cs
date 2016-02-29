@@ -15,7 +15,7 @@ namespace MaratonBusiness
                         "~/Scripts/jquery.validate*"));
 
             bundles.Add(new ScriptBundle("~/bundles/angular").Include(
-                       "~/Scripts/angular.js"));
+                       "~/Scripts/angular.min.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/flat").Include(
                        "~/Scripts/flat-ui.min.js"));

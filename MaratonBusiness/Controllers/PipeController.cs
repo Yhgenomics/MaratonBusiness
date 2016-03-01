@@ -64,6 +64,7 @@ namespace MaratonBusiness.Controllers
                 dbt.Id = form["Id"];
                 dbt.Name = form["Name"];
                 dbt.Executor = form["Executor"];
+                dbt.IsMultipleInput = form["IsMultipleInput"] != "false";
                 dbt.Parameters = form["Parameters"].Split(new string[] { "\r\n", "\r", "\n" }, StringSplitOptions.RemoveEmptyEntries).ToList();
                 UpdateDefinitionBuilder<DbPipe> builder = new UpdateDefinitionBuilder<DbPipe>();
 

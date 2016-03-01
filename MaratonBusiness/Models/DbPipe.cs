@@ -13,6 +13,7 @@ namespace MaratonBusiness.Models
         }
         public string Name { get; set; }
         public string Executor { get; set; }
+        public bool IsMultipleInput { get; set; }
         public List<string> Parameters { get; set; }
     }
 }

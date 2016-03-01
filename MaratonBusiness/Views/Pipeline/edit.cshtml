@@ -29,7 +29,7 @@
         </div>
         @Html.Hidden("Pipes", string.Join(",",Model.PipeIds))
         <div class="form-group">
-            <span class="control-label col-md-2">Pipe</span>
+            <label class="control-label col-md-2">Pipe</label>
             <div class="col-md-4">
                 <div id="pipelist">
                     @foreach (var item in Model.PipeIds)

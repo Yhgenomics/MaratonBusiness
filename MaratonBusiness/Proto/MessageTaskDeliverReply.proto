@@ -1,0 +1,6 @@
+message MessageTaskDeliverReply
+{
+    required string taskid  = 0;
+    required int32 code     = 1;
+    required string message = 2;
+}

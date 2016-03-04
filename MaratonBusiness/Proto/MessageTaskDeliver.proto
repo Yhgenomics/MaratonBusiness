@@ -1,0 +1,25 @@
+message MessagePipe
+{
+    required string id              = 0;
+    required string name            = 1;
+    required string executor        = 2;
+    required bool multipleInput     = 3;
+    required bool multipleThread    = 4;
+    repeated string parameters      = 5;
+}
+
+message MessagePipeline
+{
+    required string id         = 0;
+    required string name       = 1;
+    repeated MessagePipe pipes = 2;
+}
+
+message MessageTaskDeliver
+{
+    required string id                  = 0;
+    repeated string resources           = 1;
+    repeated string input               = 2;
+    repeated string servants            = 3;
+    repeated MessagePipeline pipeline   = 4;
+}

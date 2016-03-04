@@ -65,10 +65,12 @@ namespace MaratonBusiness.Controllers
                 dbt.Name = form["Name"];
                 dbt.Executor = form["Executor"];
                 dbt.IsMultipleInput = form["IsMultipleInput"] != "false";
+                dbt.IsMultipleThread = form["IsMultipleThread"] != "false";
                 dbt.Parameters = form["Parameters"].Split(new string[] { "\r\n", "\r", "\n" }, StringSplitOptions.RemoveEmptyEntries).ToList();
-                UpdateDefinitionBuilder<DbPipe> builder = new UpdateDefinitionBuilder<DbPipe>();
 
-                var t = mdb.UpdateOne<DbPipe>(x => x.Id == dbt.Id, dbt);
+                UpdateDefinitionBuilder<DbPipe> builder = new UpdateDefinitionBuilder<DbPipe>();
+                mdb.UpdateOne<DbPipe>(x => x.Id == dbt.Id, dbt);
+
             }
 
             return RedirectToAction("index");

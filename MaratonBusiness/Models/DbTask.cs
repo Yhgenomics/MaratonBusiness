@@ -12,6 +12,7 @@ namespace MaratonBusiness.Models
             Resources = new List<string>();
             Servants = new List<string>();
             Pipelines = new List<string>();
+            Inputs = new List<string>();
         }
 
         public string Name { get; set; }

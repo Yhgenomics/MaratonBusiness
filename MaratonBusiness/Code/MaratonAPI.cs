@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MaratonBusiness.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -7,17 +8,18 @@ namespace MaratonBusiness.Code
 {
     public class MaratonAPI
     {
-        string ip = "";
-        int port = 102;
+        string ip = "10.0.0.219";
+        int port = 91;
+
         public MaratonAPI()
         {
+
         }
 
         public MaratonAPI(string ip)
         {
             this.ip = ip;
         }
-
 
         public Message.MessageServantStateReply ServantList()
         {
@@ -27,6 +29,47 @@ namespace MaratonBusiness.Code
             state.Code = 0;
             sock.Send<Message.MessageServantState>(Message.MessageServantState.SerializeToBytes(state));
             var msg = sock.Receive() as Message.MessageServantStateReply;
+            sock.Close();
+            return msg;
+        }
+
+
+        public Message.MessageTaskDeliverReply TaskDeliver(DbTask task , DbPipeline line)
+        {
+            XSocket sock = new XSocket();
+            Message.MessageTaskDeliverReply msg;
+            sock.Connect(this.ip, this.port);
+
+            Message.MessageTaskDeliver td = new Message.MessageTaskDeliver();
+            td.Id = task.Id;
+            td.Input = task.Inputs;
+            td.Servants = task.Servants;
+            td.Resources = new List<string>();
+            td.IsMultiple = line.IsMultiple;
+            td.Pipeline = new List<Message.MessagePipeline>();
+            td.Pipeline.Add(new Message.MessagePipeline() {
+                Id = line.Id,
+                Name = line.Name,
+                Pipes = new List<Message.MessagePipe>()
+            }); 
+
+            using (MDB db = new MDB())
+            {
+                for (int i = 0; i < line.PipeIds.Count; i++)
+                {
+                    var pipe = db.FindOne<DbPipe>(x => x.Id == line.PipeIds[i]);
+                    td.Pipeline[0].Pipes.Add(new Message.MessagePipe() {
+                        Id = pipe.Id,
+                        Executor = pipe.Executor,
+                        MultipleInput = pipe.IsMultipleInput ,
+                        MultipleThread = pipe.IsMultipleThread ,
+                        Parameters = pipe.Parameters ,
+                        Name = pipe.Name  });
+                }
+            }
+
+            sock.Send<Message.MessageTaskDeliver>(Message.MessageTaskDeliver.SerializeToBytes(td));
+            msg = sock.Receive() as Message.MessageTaskDeliverReply;
             sock.Close();
             return msg;
         }

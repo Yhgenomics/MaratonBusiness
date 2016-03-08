@@ -41,6 +41,7 @@ namespace MaratonBusiness.Controllers
                 Models.DbPipeline line = new Models.DbPipeline();
                 line.Name = form["Name"];
                 line.PipeIds.AddRange(form["Pipes"].Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries));
+                line.ServantIds.AddRange(form["Servants"].Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries));
                 db.Insert(line);
                 return RedirectToAction("index");
             }
@@ -73,5 +74,13 @@ namespace MaratonBusiness.Controllers
                 return RedirectToAction("index");
             }
         }
+
+
+        public ActionResult servantlist()
+        {
+            MaratonAPI api = new MaratonAPI();
+            return View(api.ServantList());
+        }
+
     }
 }

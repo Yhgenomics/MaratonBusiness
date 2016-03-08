@@ -10,9 +10,12 @@ namespace MaratonBusiness.Models
         public DbPipeline()
         {
             PipeIds = new List<string>();
+            ServantIds = new List<string>();
         }
 
         public string Name { get; set; }
         public List<string> PipeIds { get; set; }
+        public List<string> ServantIds { get; set; }
+        public bool IsMultiple { get; set; }
     }
 }

@@ -41,7 +41,7 @@
             <tbody>
                 @foreach (var item in Model.Tasks)
                 {
-                    <tr>
+                    <tr class="@Html.CreateState(item.State)">
                         <td>
                             @item.Id
                         </td>
@@ -52,9 +52,15 @@
                             @item.State
                         </td>
                         <td>
-                            @item.CreateTime.ToString("yyyy-MM-dd hh:mm:ss");
+                            @item.CreateTime.ToString("yyyy-MM-dd hh:mm:ss")
                         </td>
                         <td>
+                            @if( item.State == 0)
+                            {
+                                <a class="btn btn-info" href="@Url.Action("start", new { id = item.Id })">Start</a>
+                            }
+
+                            <a class="btn btn-danger" href="@Url.Action("delete", new { id = item.Id })">Delete</a>
 
                         </td>
                     </tr>

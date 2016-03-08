@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MaratonBusiness.Code;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,7 +12,9 @@ namespace MaratonBusiness.Controllers
         // GET: Servant
         public ActionResult index()
         {
-            return View();
+            MaratonAPI api = new MaratonAPI();
+            var mod = api.ServantList();
+            return View(mod);
         }
     }
 }

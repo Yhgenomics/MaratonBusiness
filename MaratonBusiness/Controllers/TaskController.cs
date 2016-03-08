@@ -33,13 +33,6 @@ namespace MaratonBusiness.Controllers
             }
         }
 
-        public ActionResult servantlist()
-        {
-
-            return View();
-        }
-
-
         public ActionResult create()
         {
             return View();
@@ -48,7 +41,59 @@ namespace MaratonBusiness.Controllers
         [HttpPost]
         public ActionResult create(FormCollection form)
         {
-            return RedirectToAction("create");
+            DbTask task = new DbTask();
+            task.Name = form["Name"];
+            task.CreateTime = DateTime.Now;
+            task.Inputs.AddRange(form["Inputs"].Split(new string[] { "\r", "\n" }, StringSplitOptions.RemoveEmptyEntries));
+            task.Pipelines.AddRange(form["Pipelines"].Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries));
+            task.Servants.AddRange(form["Servants"].Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries));
+            task.State = 0;
+
+            using (MDB db = new MDB())
+            {
+                db.Insert<DbTask>(task);
+            }
+
+            return RedirectToAction("index");
+        }
+
+        public ActionResult start(string id)
+        {
+            using (MDB db = new MDB())
+            {
+                var task = db.Find<DbTask>(x => x.Id == id).FirstOrDefault();
+                if (task == null)
+                {
+                    return RedirectToAction("index");
+                }
+
+                var pipeline = db.Find<DbPipeline>(x => x.Id == task.Pipelines[0]).FirstOrDefault();
+
+                if (pipeline == null)
+                {
+                    return RedirectToAction("index");
+                }
+
+                MaratonAPI api = new MaratonAPI();
+                var result = api.TaskDeliver(task, pipeline);
+
+                //if( result.Code == 0 )
+                //{
+
+                //}
+            }
+
+            return RedirectToAction("index");
+        }
+
+        public ActionResult delete(string id)
+        {
+            using (MDB db = new MDB())
+            {
+                db.Delete<DbTask>(x => x.Id == id);
+            }
+
+            return RedirectToAction("index");
         }
     }
 }

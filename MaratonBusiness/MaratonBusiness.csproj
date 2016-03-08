@@ -144,6 +144,7 @@
     <Compile Include="Code\Protocol.Serializer.cs" />
     <Compile Include="Code\ProtocolParser.cs" />
     <Compile Include="Code\XSocket.cs" />
+    <Compile Include="Controllers\callbackController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PipelineController.cs" />
     <Compile Include="Controllers\ServantController.cs" />
@@ -176,6 +177,7 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Images\favicon.ico" />
+    <Content Include="Images\logo.png" />
     <Content Include="Scripts\angular-animate.js" />
     <Content Include="Scripts\angular-animate.min.js" />
     <Content Include="Scripts\angular-aria.js" />
@@ -1005,6 +1007,8 @@
     <Content Include="Views\Pipeline\edit.cshtml" />
     <Content Include="Views\Task\create.cshtml" />
     <Content Include="Views\Task\pipelinelist.cshtml" />
+    <Content Include="Views\Task\servantlist.cshtml" />
+    <Content Include="Views\Pipeline\servantlist.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1014,6 +1018,7 @@
     <Folder Include="Images\tile\" />
     <Folder Include="Proto\" />
     <Folder Include="Scripts\vendor\" />
+    <Folder Include="Views\callback\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

@@ -8,6 +8,36 @@ namespace System.Web.Mvc
 {
     public static class HtmlHelperExtention
     {
+        public static MvcHtmlString CreateState(this HtmlHelper helper, int state)
+        {
+            string ret = "";
+            switch(state)
+            {
+                case 0:
+                    {
+                        ret = "";
+                    }
+                    break;
+                case 1:
+                    {
+                        ret = "info";
+                    }
+                    break;
+                case 2:
+                    {
+                        ret = "success";
+                    }
+                    break;
+                case 3:
+                    {
+                        ret = "danger";
+                    }
+                    break;
+            }
+
+            return MvcHtmlString.Create(ret);
+        }
+
         public static MvcHtmlString CreatePaginatio(this HtmlHelper helper ,UrlHelper url, MaratonBusiness.Models.Pagination Model , string action , string controller) 
         {
             string html = "";

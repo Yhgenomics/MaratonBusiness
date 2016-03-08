@@ -1,13 +1,8 @@
-﻿@model Message.MessageServantStateReply
-@{
-    ViewBag.Title = "index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+﻿@{
+    Layout = null;
 }
-<ol class="breadcrumb">
-    <li><a href="/">Home</a></li>
-    <li><a href="@Url.Action("index","Servant")">Servant</a></li>
-</ol>
-<hr />
+@model Message.MessageServantStateReply
+
 <div class="row">
     <div class="col-lg-12">
         <table class="table table-hover">
@@ -15,7 +10,7 @@
                 <tr>
                     <td>
                         #
-                    </td> 
+                    </td>
                     <td>
                         Status
                     </td>
@@ -28,15 +23,15 @@
                 </tr>
             </thead>
             <tbody>
-                @for (int i = 0;  i < Model.Id.Count; i++)
+                @for (int i = 0; i < Model.Id.Count; i++)
                 {
-                    <tr>
+                    <tr onclick="selectServant({ 'id' : '@Model.Id[i]'})">
                         <td>
                             @Model.Id[i]
                         </td>
                         <td>
                             @Model.State[i]
-                        </td> 
+                        </td>
                         <td>
                             @Model.Cpu[i]
                         </td>

@@ -67,8 +67,8 @@ namespace Message
                 // Optimized reading of known fields with field ID < 16
                 switch (keyByte)
                 {
-                    // Field 0 Varint
-                    case 0:
+                    // Field 1 Varint
+                    case 8:
                         instance.Code = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
                         continue;
                 }
@@ -109,8 +109,8 @@ namespace Message
                 // Optimized reading of known fields with field ID < 16
                 switch (keyByte)
                 {
-                    // Field 0 Varint
-                    case 0:
+                    // Field 1 Varint
+                    case 8:
                         instance.Code = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
                         continue;
                 }
@@ -150,8 +150,8 @@ namespace Message
                 // Optimized reading of known fields with field ID < 16
                 switch (keyByte)
                 {
-                    // Field 0 Varint
-                    case 0:
+                    // Field 1 Varint
+                    case 8:
                         instance.Code = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
                         continue;
                 }
@@ -176,8 +176,8 @@ namespace Message
         public static void Serialize(Stream stream, MessageServantState instance)
         {
             var msField = global::SilentOrbit.ProtocolBuffers.ProtocolParser.Stack.Pop();
-            // Key for field: 0, Varint
-            stream.WriteByte(0);
+            // Key for field: 1, Varint
+            stream.WriteByte(8);
             global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt64(stream,(ulong)instance.Code);
             global::SilentOrbit.ProtocolBuffers.ProtocolParser.Stack.Push(msField);
         }
@@ -262,25 +262,29 @@ namespace Message
                 // Optimized reading of known fields with field ID < 16
                 switch (keyByte)
                 {
-                    // Field 0 LengthDelimited
-                    case 2:
+                    // Field 1 LengthDelimited
+                    case 10:
                         // repeated
                         instance.Id.Add(global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadString(stream));
-                        continue;
-                    // Field 1 Varint
-                    case 8:
-                        // repeated
-                        instance.State.Add((int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream));
                         continue;
                     // Field 2 Varint
                     case 16:
                         // repeated
-                        instance.Cpu.Add((int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream));
+                        instance.State.Add((int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream));
                         continue;
                     // Field 3 Varint
                     case 24:
                         // repeated
+                        instance.Cpu.Add((int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream));
+                        continue;
+                    // Field 4 Varint
+                    case 32:
+                        // repeated
                         instance.Memory.Add((int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream));
+                        continue;
+                    // Field 5 Varint
+                    case 40:
+                        instance.Type = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
                         continue;
                 }
 
@@ -328,25 +332,29 @@ namespace Message
                 // Optimized reading of known fields with field ID < 16
                 switch (keyByte)
                 {
-                    // Field 0 LengthDelimited
-                    case 2:
+                    // Field 1 LengthDelimited
+                    case 10:
                         // repeated
                         instance.Id.Add(global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadString(stream));
-                        continue;
-                    // Field 1 Varint
-                    case 8:
-                        // repeated
-                        instance.State.Add((int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream));
                         continue;
                     // Field 2 Varint
                     case 16:
                         // repeated
-                        instance.Cpu.Add((int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream));
+                        instance.State.Add((int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream));
                         continue;
                     // Field 3 Varint
                     case 24:
                         // repeated
+                        instance.Cpu.Add((int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream));
+                        continue;
+                    // Field 4 Varint
+                    case 32:
+                        // repeated
                         instance.Memory.Add((int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream));
+                        continue;
+                    // Field 5 Varint
+                    case 40:
+                        instance.Type = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
                         continue;
                 }
 
@@ -393,25 +401,29 @@ namespace Message
                 // Optimized reading of known fields with field ID < 16
                 switch (keyByte)
                 {
-                    // Field 0 LengthDelimited
-                    case 2:
+                    // Field 1 LengthDelimited
+                    case 10:
                         // repeated
                         instance.Id.Add(global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadString(stream));
-                        continue;
-                    // Field 1 Varint
-                    case 8:
-                        // repeated
-                        instance.State.Add((int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream));
                         continue;
                     // Field 2 Varint
                     case 16:
                         // repeated
-                        instance.Cpu.Add((int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream));
+                        instance.State.Add((int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream));
                         continue;
                     // Field 3 Varint
                     case 24:
                         // repeated
+                        instance.Cpu.Add((int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream));
+                        continue;
+                    // Field 4 Varint
+                    case 32:
+                        // repeated
                         instance.Memory.Add((int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream));
+                        continue;
+                    // Field 5 Varint
+                    case 40:
+                        instance.Type = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
                         continue;
                 }
 
@@ -437,40 +449,43 @@ namespace Message
             var msField = global::SilentOrbit.ProtocolBuffers.ProtocolParser.Stack.Pop();
             if (instance.Id != null)
             {
-                foreach (var i0 in instance.Id)
+                foreach (var i1 in instance.Id)
                 {
-                    // Key for field: 0, LengthDelimited
-                    stream.WriteByte(2);
-                    global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteBytes(stream, Encoding.UTF8.GetBytes(i0));
+                    // Key for field: 1, LengthDelimited
+                    stream.WriteByte(10);
+                    global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteBytes(stream, Encoding.UTF8.GetBytes(i1));
                 }
             }
             if (instance.State != null)
             {
-                foreach (var i1 in instance.State)
-                {
-                    // Key for field: 1, Varint
-                    stream.WriteByte(8);
-                    global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt64(stream,(ulong)i1);
-                }
-            }
-            if (instance.Cpu != null)
-            {
-                foreach (var i2 in instance.Cpu)
+                foreach (var i2 in instance.State)
                 {
                     // Key for field: 2, Varint
                     stream.WriteByte(16);
                     global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt64(stream,(ulong)i2);
                 }
             }
-            if (instance.Memory != null)
+            if (instance.Cpu != null)
             {
-                foreach (var i3 in instance.Memory)
+                foreach (var i3 in instance.Cpu)
                 {
                     // Key for field: 3, Varint
                     stream.WriteByte(24);
                     global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt64(stream,(ulong)i3);
                 }
             }
+            if (instance.Memory != null)
+            {
+                foreach (var i4 in instance.Memory)
+                {
+                    // Key for field: 4, Varint
+                    stream.WriteByte(32);
+                    global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt64(stream,(ulong)i4);
+                }
+            }
+            // Key for field: 5, Varint
+            stream.WriteByte(40);
+            global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt64(stream,(ulong)instance.Type);
             global::SilentOrbit.ProtocolBuffers.ProtocolParser.Stack.Push(msField);
         }
 
@@ -546,8 +561,8 @@ namespace Message
                 // Optimized reading of known fields with field ID < 16
                 switch (keyByte)
                 {
-                    // Field 0 Varint
-                    case 0:
+                    // Field 1 Varint
+                    case 8:
                         instance.Code = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
                         continue;
                 }
@@ -588,8 +603,8 @@ namespace Message
                 // Optimized reading of known fields with field ID < 16
                 switch (keyByte)
                 {
-                    // Field 0 Varint
-                    case 0:
+                    // Field 1 Varint
+                    case 8:
                         instance.Code = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
                         continue;
                 }
@@ -629,8 +644,8 @@ namespace Message
                 // Optimized reading of known fields with field ID < 16
                 switch (keyByte)
                 {
-                    // Field 0 Varint
-                    case 0:
+                    // Field 1 Varint
+                    case 8:
                         instance.Code = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
                         continue;
                 }
@@ -655,8 +670,8 @@ namespace Message
         public static void Serialize(Stream stream, MessageState instance)
         {
             var msField = global::SilentOrbit.ProtocolBuffers.ProtocolParser.Stack.Pop();
-            // Key for field: 0, Varint
-            stream.WriteByte(0);
+            // Key for field: 1, Varint
+            stream.WriteByte(8);
             global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt64(stream,(ulong)instance.Code);
             global::SilentOrbit.ProtocolBuffers.ProtocolParser.Stack.Push(msField);
         }
@@ -733,8 +748,8 @@ namespace Message
                 // Optimized reading of known fields with field ID < 16
                 switch (keyByte)
                 {
-                    // Field 0 Varint
-                    case 0:
+                    // Field 1 Varint
+                    case 8:
                         instance.Code = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
                         continue;
                 }
@@ -775,8 +790,8 @@ namespace Message
                 // Optimized reading of known fields with field ID < 16
                 switch (keyByte)
                 {
-                    // Field 0 Varint
-                    case 0:
+                    // Field 1 Varint
+                    case 8:
                         instance.Code = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
                         continue;
                 }
@@ -816,8 +831,8 @@ namespace Message
                 // Optimized reading of known fields with field ID < 16
                 switch (keyByte)
                 {
-                    // Field 0 Varint
-                    case 0:
+                    // Field 1 Varint
+                    case 8:
                         instance.Code = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
                         continue;
                 }
@@ -842,8 +857,8 @@ namespace Message
         public static void Serialize(Stream stream, MessageStateReply instance)
         {
             var msField = global::SilentOrbit.ProtocolBuffers.ProtocolParser.Stack.Pop();
-            // Key for field: 0, Varint
-            stream.WriteByte(0);
+            // Key for field: 1, Varint
+            stream.WriteByte(8);
             global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt64(stream,(ulong)instance.Code);
             global::SilentOrbit.ProtocolBuffers.ProtocolParser.Stack.Push(msField);
         }
@@ -922,28 +937,28 @@ namespace Message
                 // Optimized reading of known fields with field ID < 16
                 switch (keyByte)
                 {
-                    // Field 0 LengthDelimited
-                    case 2:
-                        instance.Id = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadString(stream);
-                        continue;
                     // Field 1 LengthDelimited
                     case 10:
-                        instance.Name = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadString(stream);
+                        instance.Id = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadString(stream);
                         continue;
                     // Field 2 LengthDelimited
                     case 18:
-                        instance.Executor = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadString(stream);
+                        instance.Name = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadString(stream);
                         continue;
-                    // Field 3 Varint
-                    case 24:
-                        instance.MultipleInput = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadBool(stream);
+                    // Field 3 LengthDelimited
+                    case 26:
+                        instance.Executor = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadString(stream);
                         continue;
                     // Field 4 Varint
                     case 32:
+                        instance.MultipleInput = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadBool(stream);
+                        continue;
+                    // Field 5 Varint
+                    case 40:
                         instance.MultipleThread = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadBool(stream);
                         continue;
-                    // Field 5 LengthDelimited
-                    case 42:
+                    // Field 6 LengthDelimited
+                    case 50:
                         // repeated
                         instance.Parameters.Add(global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadString(stream));
                         continue;
@@ -987,28 +1002,28 @@ namespace Message
                 // Optimized reading of known fields with field ID < 16
                 switch (keyByte)
                 {
-                    // Field 0 LengthDelimited
-                    case 2:
-                        instance.Id = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadString(stream);
-                        continue;
                     // Field 1 LengthDelimited
                     case 10:
-                        instance.Name = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadString(stream);
+                        instance.Id = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadString(stream);
                         continue;
                     // Field 2 LengthDelimited
                     case 18:
-                        instance.Executor = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadString(stream);
+                        instance.Name = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadString(stream);
                         continue;
-                    // Field 3 Varint
-                    case 24:
-                        instance.MultipleInput = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadBool(stream);
+                    // Field 3 LengthDelimited
+                    case 26:
+                        instance.Executor = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadString(stream);
                         continue;
                     // Field 4 Varint
                     case 32:
+                        instance.MultipleInput = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadBool(stream);
+                        continue;
+                    // Field 5 Varint
+                    case 40:
                         instance.MultipleThread = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadBool(stream);
                         continue;
-                    // Field 5 LengthDelimited
-                    case 42:
+                    // Field 6 LengthDelimited
+                    case 50:
                         // repeated
                         instance.Parameters.Add(global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadString(stream));
                         continue;
@@ -1051,28 +1066,28 @@ namespace Message
                 // Optimized reading of known fields with field ID < 16
                 switch (keyByte)
                 {
-                    // Field 0 LengthDelimited
-                    case 2:
-                        instance.Id = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadString(stream);
-                        continue;
                     // Field 1 LengthDelimited
                     case 10:
-                        instance.Name = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadString(stream);
+                        instance.Id = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadString(stream);
                         continue;
                     // Field 2 LengthDelimited
                     case 18:
-                        instance.Executor = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadString(stream);
+                        instance.Name = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadString(stream);
                         continue;
-                    // Field 3 Varint
-                    case 24:
-                        instance.MultipleInput = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadBool(stream);
+                    // Field 3 LengthDelimited
+                    case 26:
+                        instance.Executor = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadString(stream);
                         continue;
                     // Field 4 Varint
                     case 32:
+                        instance.MultipleInput = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadBool(stream);
+                        continue;
+                    // Field 5 Varint
+                    case 40:
                         instance.MultipleThread = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadBool(stream);
                         continue;
-                    // Field 5 LengthDelimited
-                    case 42:
+                    // Field 6 LengthDelimited
+                    case 50:
                         // repeated
                         instance.Parameters.Add(global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadString(stream));
                         continue;
@@ -1100,32 +1115,32 @@ namespace Message
             var msField = global::SilentOrbit.ProtocolBuffers.ProtocolParser.Stack.Pop();
             if (instance.Id == null)
                 throw new global::SilentOrbit.ProtocolBuffers.ProtocolBufferException("Id is required by the proto specification.");
-            // Key for field: 0, LengthDelimited
-            stream.WriteByte(2);
+            // Key for field: 1, LengthDelimited
+            stream.WriteByte(10);
             global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteBytes(stream, Encoding.UTF8.GetBytes(instance.Id));
             if (instance.Name == null)
                 throw new global::SilentOrbit.ProtocolBuffers.ProtocolBufferException("Name is required by the proto specification.");
-            // Key for field: 1, LengthDelimited
-            stream.WriteByte(10);
+            // Key for field: 2, LengthDelimited
+            stream.WriteByte(18);
             global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteBytes(stream, Encoding.UTF8.GetBytes(instance.Name));
             if (instance.Executor == null)
                 throw new global::SilentOrbit.ProtocolBuffers.ProtocolBufferException("Executor is required by the proto specification.");
-            // Key for field: 2, LengthDelimited
-            stream.WriteByte(18);
+            // Key for field: 3, LengthDelimited
+            stream.WriteByte(26);
             global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteBytes(stream, Encoding.UTF8.GetBytes(instance.Executor));
-            // Key for field: 3, Varint
-            stream.WriteByte(24);
-            global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteBool(stream, instance.MultipleInput);
             // Key for field: 4, Varint
             stream.WriteByte(32);
+            global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteBool(stream, instance.MultipleInput);
+            // Key for field: 5, Varint
+            stream.WriteByte(40);
             global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteBool(stream, instance.MultipleThread);
             if (instance.Parameters != null)
             {
-                foreach (var i5 in instance.Parameters)
+                foreach (var i6 in instance.Parameters)
                 {
-                    // Key for field: 5, LengthDelimited
-                    stream.WriteByte(42);
-                    global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteBytes(stream, Encoding.UTF8.GetBytes(i5));
+                    // Key for field: 6, LengthDelimited
+                    stream.WriteByte(50);
+                    global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteBytes(stream, Encoding.UTF8.GetBytes(i6));
                 }
             }
             global::SilentOrbit.ProtocolBuffers.ProtocolParser.Stack.Push(msField);
@@ -1205,16 +1220,16 @@ namespace Message
                 // Optimized reading of known fields with field ID < 16
                 switch (keyByte)
                 {
-                    // Field 0 LengthDelimited
-                    case 2:
-                        instance.Id = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadString(stream);
-                        continue;
                     // Field 1 LengthDelimited
                     case 10:
-                        instance.Name = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadString(stream);
+                        instance.Id = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadString(stream);
                         continue;
                     // Field 2 LengthDelimited
                     case 18:
+                        instance.Name = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadString(stream);
+                        continue;
+                    // Field 3 LengthDelimited
+                    case 26:
                         // repeated
                         instance.Pipes.Add(Message.MessagePipe.DeserializeLengthDelimited(stream));
                         continue;
@@ -1258,16 +1273,16 @@ namespace Message
                 // Optimized reading of known fields with field ID < 16
                 switch (keyByte)
                 {
-                    // Field 0 LengthDelimited
-                    case 2:
-                        instance.Id = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadString(stream);
-                        continue;
                     // Field 1 LengthDelimited
                     case 10:
-                        instance.Name = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadString(stream);
+                        instance.Id = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadString(stream);
                         continue;
                     // Field 2 LengthDelimited
                     case 18:
+                        instance.Name = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadString(stream);
+                        continue;
+                    // Field 3 LengthDelimited
+                    case 26:
                         // repeated
                         instance.Pipes.Add(Message.MessagePipe.DeserializeLengthDelimited(stream));
                         continue;
@@ -1310,16 +1325,16 @@ namespace Message
                 // Optimized reading of known fields with field ID < 16
                 switch (keyByte)
                 {
-                    // Field 0 LengthDelimited
-                    case 2:
-                        instance.Id = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadString(stream);
-                        continue;
                     // Field 1 LengthDelimited
                     case 10:
-                        instance.Name = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadString(stream);
+                        instance.Id = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadString(stream);
                         continue;
                     // Field 2 LengthDelimited
                     case 18:
+                        instance.Name = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadString(stream);
+                        continue;
+                    // Field 3 LengthDelimited
+                    case 26:
                         // repeated
                         instance.Pipes.Add(Message.MessagePipe.DeserializeLengthDelimited(stream));
                         continue;
@@ -1347,25 +1362,25 @@ namespace Message
             var msField = global::SilentOrbit.ProtocolBuffers.ProtocolParser.Stack.Pop();
             if (instance.Id == null)
                 throw new global::SilentOrbit.ProtocolBuffers.ProtocolBufferException("Id is required by the proto specification.");
-            // Key for field: 0, LengthDelimited
-            stream.WriteByte(2);
+            // Key for field: 1, LengthDelimited
+            stream.WriteByte(10);
             global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteBytes(stream, Encoding.UTF8.GetBytes(instance.Id));
             if (instance.Name == null)
                 throw new global::SilentOrbit.ProtocolBuffers.ProtocolBufferException("Name is required by the proto specification.");
-            // Key for field: 1, LengthDelimited
-            stream.WriteByte(10);
+            // Key for field: 2, LengthDelimited
+            stream.WriteByte(18);
             global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteBytes(stream, Encoding.UTF8.GetBytes(instance.Name));
             if (instance.Pipes != null)
             {
-                foreach (var i2 in instance.Pipes)
+                foreach (var i3 in instance.Pipes)
                 {
-                    // Key for field: 2, LengthDelimited
-                    stream.WriteByte(18);
+                    // Key for field: 3, LengthDelimited
+                    stream.WriteByte(26);
                     ﻿msField.SetLength(0);
-                    Message.MessagePipe.Serialize(msField, i2);
+                    Message.MessagePipe.Serialize(msField, i3);
                     // Length delimited byte array
-                    uint length2 = (uint)msField.Length;
-                    global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt32(stream, length2);
+                    uint length3 = (uint)msField.Length;
+                    global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt32(stream, length3);
                     msField.WriteTo(stream);
 
                 }
@@ -1453,29 +1468,33 @@ namespace Message
                 // Optimized reading of known fields with field ID < 16
                 switch (keyByte)
                 {
-                    // Field 0 LengthDelimited
-                    case 2:
-                        instance.Id = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadString(stream);
-                        continue;
                     // Field 1 LengthDelimited
                     case 10:
-                        // repeated
-                        instance.Resources.Add(global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadString(stream));
+                        instance.Id = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadString(stream);
                         continue;
                     // Field 2 LengthDelimited
                     case 18:
                         // repeated
-                        instance.Input.Add(global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadString(stream));
+                        instance.Resources.Add(global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadString(stream));
                         continue;
                     // Field 3 LengthDelimited
                     case 26:
                         // repeated
-                        instance.Servants.Add(global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadString(stream));
+                        instance.Input.Add(global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadString(stream));
                         continue;
                     // Field 4 LengthDelimited
                     case 34:
                         // repeated
+                        instance.Servants.Add(global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadString(stream));
+                        continue;
+                    // Field 5 LengthDelimited
+                    case 42:
+                        // repeated
                         instance.Pipeline.Add(Message.MessagePipeline.DeserializeLengthDelimited(stream));
+                        continue;
+                    // Field 6 Varint
+                    case 48:
+                        instance.IsMultiple = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadBool(stream);
                         continue;
                 }
 
@@ -1523,29 +1542,33 @@ namespace Message
                 // Optimized reading of known fields with field ID < 16
                 switch (keyByte)
                 {
-                    // Field 0 LengthDelimited
-                    case 2:
-                        instance.Id = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadString(stream);
-                        continue;
                     // Field 1 LengthDelimited
                     case 10:
-                        // repeated
-                        instance.Resources.Add(global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadString(stream));
+                        instance.Id = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadString(stream);
                         continue;
                     // Field 2 LengthDelimited
                     case 18:
                         // repeated
-                        instance.Input.Add(global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadString(stream));
+                        instance.Resources.Add(global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadString(stream));
                         continue;
                     // Field 3 LengthDelimited
                     case 26:
                         // repeated
-                        instance.Servants.Add(global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadString(stream));
+                        instance.Input.Add(global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadString(stream));
                         continue;
                     // Field 4 LengthDelimited
                     case 34:
                         // repeated
+                        instance.Servants.Add(global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadString(stream));
+                        continue;
+                    // Field 5 LengthDelimited
+                    case 42:
+                        // repeated
                         instance.Pipeline.Add(Message.MessagePipeline.DeserializeLengthDelimited(stream));
+                        continue;
+                    // Field 6 Varint
+                    case 48:
+                        instance.IsMultiple = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadBool(stream);
                         continue;
                 }
 
@@ -1592,29 +1615,33 @@ namespace Message
                 // Optimized reading of known fields with field ID < 16
                 switch (keyByte)
                 {
-                    // Field 0 LengthDelimited
-                    case 2:
-                        instance.Id = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadString(stream);
-                        continue;
                     // Field 1 LengthDelimited
                     case 10:
-                        // repeated
-                        instance.Resources.Add(global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadString(stream));
+                        instance.Id = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadString(stream);
                         continue;
                     // Field 2 LengthDelimited
                     case 18:
                         // repeated
-                        instance.Input.Add(global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadString(stream));
+                        instance.Resources.Add(global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadString(stream));
                         continue;
                     // Field 3 LengthDelimited
                     case 26:
                         // repeated
-                        instance.Servants.Add(global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadString(stream));
+                        instance.Input.Add(global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadString(stream));
                         continue;
                     // Field 4 LengthDelimited
                     case 34:
                         // repeated
+                        instance.Servants.Add(global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadString(stream));
+                        continue;
+                    // Field 5 LengthDelimited
+                    case 42:
+                        // repeated
                         instance.Pipeline.Add(Message.MessagePipeline.DeserializeLengthDelimited(stream));
+                        continue;
+                    // Field 6 Varint
+                    case 48:
+                        instance.IsMultiple = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadBool(stream);
                         continue;
                 }
 
@@ -1640,51 +1667,54 @@ namespace Message
             var msField = global::SilentOrbit.ProtocolBuffers.ProtocolParser.Stack.Pop();
             if (instance.Id == null)
                 throw new global::SilentOrbit.ProtocolBuffers.ProtocolBufferException("Id is required by the proto specification.");
-            // Key for field: 0, LengthDelimited
-            stream.WriteByte(2);
+            // Key for field: 1, LengthDelimited
+            stream.WriteByte(10);
             global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteBytes(stream, Encoding.UTF8.GetBytes(instance.Id));
             if (instance.Resources != null)
             {
-                foreach (var i1 in instance.Resources)
-                {
-                    // Key for field: 1, LengthDelimited
-                    stream.WriteByte(10);
-                    global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteBytes(stream, Encoding.UTF8.GetBytes(i1));
-                }
-            }
-            if (instance.Input != null)
-            {
-                foreach (var i2 in instance.Input)
+                foreach (var i2 in instance.Resources)
                 {
                     // Key for field: 2, LengthDelimited
                     stream.WriteByte(18);
                     global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteBytes(stream, Encoding.UTF8.GetBytes(i2));
                 }
             }
-            if (instance.Servants != null)
+            if (instance.Input != null)
             {
-                foreach (var i3 in instance.Servants)
+                foreach (var i3 in instance.Input)
                 {
                     // Key for field: 3, LengthDelimited
                     stream.WriteByte(26);
                     global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteBytes(stream, Encoding.UTF8.GetBytes(i3));
                 }
             }
-            if (instance.Pipeline != null)
+            if (instance.Servants != null)
             {
-                foreach (var i4 in instance.Pipeline)
+                foreach (var i4 in instance.Servants)
                 {
                     // Key for field: 4, LengthDelimited
                     stream.WriteByte(34);
+                    global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteBytes(stream, Encoding.UTF8.GetBytes(i4));
+                }
+            }
+            if (instance.Pipeline != null)
+            {
+                foreach (var i5 in instance.Pipeline)
+                {
+                    // Key for field: 5, LengthDelimited
+                    stream.WriteByte(42);
                     ﻿msField.SetLength(0);
-                    Message.MessagePipeline.Serialize(msField, i4);
+                    Message.MessagePipeline.Serialize(msField, i5);
                     // Length delimited byte array
-                    uint length4 = (uint)msField.Length;
-                    global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt32(stream, length4);
+                    uint length5 = (uint)msField.Length;
+                    global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt32(stream, length5);
                     msField.WriteTo(stream);
 
                 }
             }
+            // Key for field: 6, Varint
+            stream.WriteByte(48);
+            global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteBool(stream, instance.IsMultiple);
             global::SilentOrbit.ProtocolBuffers.ProtocolParser.Stack.Push(msField);
         }
 
@@ -1760,16 +1790,16 @@ namespace Message
                 // Optimized reading of known fields with field ID < 16
                 switch (keyByte)
                 {
-                    // Field 0 LengthDelimited
-                    case 2:
+                    // Field 1 LengthDelimited
+                    case 10:
                         instance.Taskid = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadString(stream);
                         continue;
-                    // Field 1 Varint
-                    case 8:
+                    // Field 2 Varint
+                    case 16:
                         instance.Code = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
                         continue;
-                    // Field 2 LengthDelimited
-                    case 18:
+                    // Field 3 LengthDelimited
+                    case 26:
                         instance.Message = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadString(stream);
                         continue;
                 }
@@ -1810,16 +1840,16 @@ namespace Message
                 // Optimized reading of known fields with field ID < 16
                 switch (keyByte)
                 {
-                    // Field 0 LengthDelimited
-                    case 2:
+                    // Field 1 LengthDelimited
+                    case 10:
                         instance.Taskid = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadString(stream);
                         continue;
-                    // Field 1 Varint
-                    case 8:
+                    // Field 2 Varint
+                    case 16:
                         instance.Code = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
                         continue;
-                    // Field 2 LengthDelimited
-                    case 18:
+                    // Field 3 LengthDelimited
+                    case 26:
                         instance.Message = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadString(stream);
                         continue;
                 }
@@ -1859,16 +1889,16 @@ namespace Message
                 // Optimized reading of known fields with field ID < 16
                 switch (keyByte)
                 {
-                    // Field 0 LengthDelimited
-                    case 2:
+                    // Field 1 LengthDelimited
+                    case 10:
                         instance.Taskid = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadString(stream);
                         continue;
-                    // Field 1 Varint
-                    case 8:
+                    // Field 2 Varint
+                    case 16:
                         instance.Code = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
                         continue;
-                    // Field 2 LengthDelimited
-                    case 18:
+                    // Field 3 LengthDelimited
+                    case 26:
                         instance.Message = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadString(stream);
                         continue;
                 }
@@ -1895,16 +1925,16 @@ namespace Message
             var msField = global::SilentOrbit.ProtocolBuffers.ProtocolParser.Stack.Pop();
             if (instance.Taskid == null)
                 throw new global::SilentOrbit.ProtocolBuffers.ProtocolBufferException("Taskid is required by the proto specification.");
-            // Key for field: 0, LengthDelimited
-            stream.WriteByte(2);
+            // Key for field: 1, LengthDelimited
+            stream.WriteByte(10);
             global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteBytes(stream, Encoding.UTF8.GetBytes(instance.Taskid));
-            // Key for field: 1, Varint
-            stream.WriteByte(8);
+            // Key for field: 2, Varint
+            stream.WriteByte(16);
             global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt64(stream,(ulong)instance.Code);
             if (instance.Message == null)
                 throw new global::SilentOrbit.ProtocolBuffers.ProtocolBufferException("Message is required by the proto specification.");
-            // Key for field: 2, LengthDelimited
-            stream.WriteByte(18);
+            // Key for field: 3, LengthDelimited
+            stream.WriteByte(26);
             global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteBytes(stream, Encoding.UTF8.GetBytes(instance.Message));
             global::SilentOrbit.ProtocolBuffers.ProtocolParser.Stack.Push(msField);
         }

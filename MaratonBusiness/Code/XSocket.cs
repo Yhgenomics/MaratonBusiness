@@ -81,15 +81,17 @@ namespace MaratonBusiness
         public object Receive()
         {
             var body = read_package();
+
+
             switch (body.Command)
             {
-                //MessageError
-                //case 0x7377676F7F7B777F:
-                //    {
-                //        var ins = Message.MessageActionError.Deserialize(body.Data);
-                //        return ((object)ins);
-                //    }
-                //    break;
+                //MessageServantStateReply
+                case 9187193085421385599:
+                    {
+                        var ins = Message.MessageServantStateReply.Deserialize(body.Data);
+                        return ((object)ins);
+                    }
+                break;
                 ////MessageToken
                 //case 0x546567617F776F6F:
                 //    {

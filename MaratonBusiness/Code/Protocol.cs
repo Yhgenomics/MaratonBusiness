@@ -29,6 +29,8 @@ namespace Message
 
         public List<int> Memory { get; set; }
 
+        public int Type { get; set; }
+
     }
 
     public partial class MessageState
@@ -80,6 +82,8 @@ namespace Message
         public List<string> Servants { get; set; }
 
         public List<Message.MessagePipeline> Pipeline { get; set; }
+
+        public bool IsMultiple { get; set; }
 
     }
 

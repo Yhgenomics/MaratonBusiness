@@ -45,12 +45,12 @@
         </div>
 
         <div class="form-group">
-            @Html.Hidden("Pipelines")
+            @Html.Hidden("Servants")
             <label class="control-label col-md-2">Servants</label>
             <div class="col-md-10">
                 <p><a href="#" class="btn btn-success" data-toggle="modal" data-target="#servantView"><span class="glyphicon glyphicon-plus"></span></a></p>
 
-                <div id="pipelinelist">
+                <div id="servantlist">
                 </div>
             </div>
         </div>
@@ -111,7 +111,7 @@
     });
 
     var pipes = [];
-
+    var servants = [];
     function addPipe(pipe)
     {
         pipes.push(pipe);
@@ -119,9 +119,31 @@
         buildPipeTag();
     }
 
-    function selectServant()
+    function selectServant(servant)
     {
-         
+        for (var i = 0; i < servants.length; i++) {
+            if (servants[i].id == servant.id) {
+                return;
+            }
+        }
+
+        servants.push(servant);
+        $("#servantView").modal("hide");
+        buildServantsTag();
+    }
+
+    function deleteServant(index) {
+        var tmp = [];
+        for (var i = 0; i < servants.length; i++) {
+            if (i == index) {
+                continue;
+            }
+
+            tmp.push(pipes[i]);
+        }
+
+        servants = tmp;
+        buildServantsTag();
     }
 
     function deletePipe(index) {
@@ -137,6 +159,15 @@
 
         pipes = tmp;
         buildPipeTag();
+    }
+
+    function buildServantsTag() {
+        $("#Servants").val("");
+        $("#servantlist").html("");
+        for (var i = 0; i < servants.length; i++) {
+            $("#servantlist").append('<div><span>' + servants[i].id + '<a href="javascript:deleteServant(' + i + ')"><i class="glyphicon glyphicon-remove"></i></a></span></div>');
+            $("#Servants").val($("#Servants").val() + "," + servants[i].id);
+        }
     }
 
     function buildPipeTag()

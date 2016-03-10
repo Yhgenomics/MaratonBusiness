@@ -16,6 +16,6 @@ namespace MaratonBusiness.Models
         public string Name { get; set; }
         public List<string> PipeIds { get; set; }
         public List<string> ServantIds { get; set; }
-        public bool IsMultiple { get; set; }
+        public bool IsParallel { get; set; }
     }
 }

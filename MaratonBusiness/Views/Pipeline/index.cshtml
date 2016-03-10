@@ -30,6 +30,9 @@
                         Pipe Count
                     </td> 
                     <td>
+                        IsParallel
+                    </td>
+                    <td>
                         Servant Count
                     </td> 
                     <td>
@@ -51,6 +54,16 @@
                             </td>
                             <td>
                                 @item.PipeIds.Count
+                            </td>
+                            <td>
+                                @if( item.IsParallel )
+                                {
+                                    <span class="glyphicon glyphicon-ok"></span>
+                                }
+                                else
+                                {
+                                    <span class="glyphicon glyphicon-remove"></span>
+                                }
                             </td>
                             <td>
                                 @item.ServantIds.Count

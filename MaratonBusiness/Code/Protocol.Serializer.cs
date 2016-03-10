@@ -254,6 +254,8 @@ namespace Message
                 instance.Cpu = new List<int>();
             if (instance.Memory == null)
                 instance.Memory = new List<int>();
+            if (instance.Type == null)
+                instance.Type = new List<int>();
             while (true)
             {
                 int keyByte = stream.ReadByte();
@@ -284,7 +286,8 @@ namespace Message
                         continue;
                     // Field 5 Varint
                     case 40:
-                        instance.Type = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                        // repeated
+                        instance.Type.Add((int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream));
                         continue;
                 }
 
@@ -315,6 +318,8 @@ namespace Message
                 instance.Cpu = new List<int>();
             if (instance.Memory == null)
                 instance.Memory = new List<int>();
+            if (instance.Type == null)
+                instance.Type = new List<int>();
             long limit = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt32(stream);
             limit += stream.Position;
             while (true)
@@ -354,7 +359,8 @@ namespace Message
                         continue;
                     // Field 5 Varint
                     case 40:
-                        instance.Type = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                        // repeated
+                        instance.Type.Add((int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream));
                         continue;
                 }
 
@@ -385,6 +391,8 @@ namespace Message
                 instance.Cpu = new List<int>();
             if (instance.Memory == null)
                 instance.Memory = new List<int>();
+            if (instance.Type == null)
+                instance.Type = new List<int>();
             long limit = stream.Position + length;
             while (true)
             {
@@ -423,7 +431,8 @@ namespace Message
                         continue;
                     // Field 5 Varint
                     case 40:
-                        instance.Type = (int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream);
+                        // repeated
+                        instance.Type.Add((int)global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt64(stream));
                         continue;
                 }
 
@@ -483,9 +492,15 @@ namespace Message
                     global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt64(stream,(ulong)i4);
                 }
             }
-            // Key for field: 5, Varint
-            stream.WriteByte(40);
-            global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt64(stream,(ulong)instance.Type);
+            if (instance.Type != null)
+            {
+                foreach (var i5 in instance.Type)
+                {
+                    // Key for field: 5, Varint
+                    stream.WriteByte(40);
+                    global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt64(stream,(ulong)i5);
+                }
+            }
             global::SilentOrbit.ProtocolBuffers.ProtocolParser.Stack.Push(msField);
         }
 
@@ -1458,8 +1473,6 @@ namespace Message
                 instance.Input = new List<string>();
             if (instance.Servants == null)
                 instance.Servants = new List<string>();
-            if (instance.Pipeline == null)
-                instance.Pipeline = new List<Message.MessagePipeline>();
             while (true)
             {
                 int keyByte = stream.ReadByte();
@@ -1489,12 +1502,14 @@ namespace Message
                         continue;
                     // Field 5 LengthDelimited
                     case 42:
-                        // repeated
-                        instance.Pipeline.Add(Message.MessagePipeline.DeserializeLengthDelimited(stream));
+                        if (instance.Pipeline == null)
+                            instance.Pipeline = Message.MessagePipeline.DeserializeLengthDelimited(stream);
+                        else
+                            Message.MessagePipeline.DeserializeLengthDelimited(stream, instance.Pipeline);
                         continue;
                     // Field 6 Varint
                     case 48:
-                        instance.IsMultiple = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadBool(stream);
+                        instance.IsParallel = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadBool(stream);
                         continue;
                 }
 
@@ -1523,8 +1538,6 @@ namespace Message
                 instance.Input = new List<string>();
             if (instance.Servants == null)
                 instance.Servants = new List<string>();
-            if (instance.Pipeline == null)
-                instance.Pipeline = new List<Message.MessagePipeline>();
             long limit = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadUInt32(stream);
             limit += stream.Position;
             while (true)
@@ -1563,12 +1576,14 @@ namespace Message
                         continue;
                     // Field 5 LengthDelimited
                     case 42:
-                        // repeated
-                        instance.Pipeline.Add(Message.MessagePipeline.DeserializeLengthDelimited(stream));
+                        if (instance.Pipeline == null)
+                            instance.Pipeline = Message.MessagePipeline.DeserializeLengthDelimited(stream);
+                        else
+                            Message.MessagePipeline.DeserializeLengthDelimited(stream, instance.Pipeline);
                         continue;
                     // Field 6 Varint
                     case 48:
-                        instance.IsMultiple = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadBool(stream);
+                        instance.IsParallel = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadBool(stream);
                         continue;
                 }
 
@@ -1597,8 +1612,6 @@ namespace Message
                 instance.Input = new List<string>();
             if (instance.Servants == null)
                 instance.Servants = new List<string>();
-            if (instance.Pipeline == null)
-                instance.Pipeline = new List<Message.MessagePipeline>();
             long limit = stream.Position + length;
             while (true)
             {
@@ -1636,12 +1649,14 @@ namespace Message
                         continue;
                     // Field 5 LengthDelimited
                     case 42:
-                        // repeated
-                        instance.Pipeline.Add(Message.MessagePipeline.DeserializeLengthDelimited(stream));
+                        if (instance.Pipeline == null)
+                            instance.Pipeline = Message.MessagePipeline.DeserializeLengthDelimited(stream);
+                        else
+                            Message.MessagePipeline.DeserializeLengthDelimited(stream, instance.Pipeline);
                         continue;
                     // Field 6 Varint
                     case 48:
-                        instance.IsMultiple = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadBool(stream);
+                        instance.IsParallel = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadBool(stream);
                         continue;
                 }
 
@@ -1697,24 +1712,20 @@ namespace Message
                     global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteBytes(stream, Encoding.UTF8.GetBytes(i4));
                 }
             }
-            if (instance.Pipeline != null)
-            {
-                foreach (var i5 in instance.Pipeline)
-                {
-                    // Key for field: 5, LengthDelimited
-                    stream.WriteByte(42);
-                    ﻿msField.SetLength(0);
-                    Message.MessagePipeline.Serialize(msField, i5);
-                    // Length delimited byte array
-                    uint length5 = (uint)msField.Length;
-                    global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt32(stream, length5);
-                    msField.WriteTo(stream);
+            if (instance.Pipeline == null)
+                throw new global::SilentOrbit.ProtocolBuffers.ProtocolBufferException("Pipeline is required by the proto specification.");
+            // Key for field: 5, LengthDelimited
+            stream.WriteByte(42);
+            ﻿msField.SetLength(0);
+            Message.MessagePipeline.Serialize(msField, instance.Pipeline);
+            // Length delimited byte array
+            uint length5 = (uint)msField.Length;
+            global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteUInt32(stream, length5);
+            msField.WriteTo(stream);
 
-                }
-            }
             // Key for field: 6, Varint
             stream.WriteByte(48);
-            global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteBool(stream, instance.IsMultiple);
+            global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteBool(stream, instance.IsParallel);
             global::SilentOrbit.ProtocolBuffers.ProtocolParser.Stack.Push(msField);
         }
 

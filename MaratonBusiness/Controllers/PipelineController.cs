@@ -42,6 +42,7 @@ namespace MaratonBusiness.Controllers
                 line.Name = form["Name"];
                 line.PipeIds.AddRange(form["Pipes"].Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries));
                 line.ServantIds.AddRange(form["Servants"].Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries));
+                line.IsParallel = form["IsParallel"] != "false";
                 db.Insert(line);
                 return RedirectToAction("index");
             }
@@ -61,6 +62,7 @@ namespace MaratonBusiness.Controllers
                 line.Id = form["Id"];
                 line.Name = form["Name"];
                 line.PipeIds.AddRange(form["Pipes"].Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries));
+                line.IsParallel = form["IsParallel"] != "false";
                 db.UpdateOne(x => x.Id == line.Id, line);
                 return Redirect("index");
             }

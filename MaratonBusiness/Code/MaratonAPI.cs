@@ -45,9 +45,8 @@ namespace MaratonBusiness.Code
             td.Input = task.Inputs;
             td.Servants = task.Servants;
             td.Resources = new List<string>();
-            td.IsMultiple = line.IsMultiple;
-            td.Pipeline = new List<Message.MessagePipeline>();
-            td.Pipeline.Add(new Message.MessagePipeline() {
+            td.IsParallel = line.IsParallel;
+            td.Pipeline = (new Message.MessagePipeline() {
                 Id = line.Id,
                 Name = line.Name,
                 Pipes = new List<Message.MessagePipe>()
@@ -58,7 +57,7 @@ namespace MaratonBusiness.Code
                 for (int i = 0; i < line.PipeIds.Count; i++)
                 {
                     var pipe = db.FindOne<DbPipe>(x => x.Id == line.PipeIds[i]);
-                    td.Pipeline[0].Pipes.Add(new Message.MessagePipe() {
+                    td.Pipeline.Pipes.Add(new Message.MessagePipe() {
                         Id = pipe.Id,
                         Executor = pipe.Executor,
                         MultipleInput = pipe.IsMultipleInput ,

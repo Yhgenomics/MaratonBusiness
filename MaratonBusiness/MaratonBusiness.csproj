@@ -150,6 +150,7 @@
     <Compile Include="Controllers\ServantController.cs" />
     <Compile Include="Controllers\TaskController.cs" />
     <Compile Include="Controllers\PipeController.cs" />
+    <Compile Include="Controllers\testController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -1009,6 +1010,7 @@
     <Content Include="Views\Task\pipelinelist.cshtml" />
     <Content Include="Views\Task\servantlist.cshtml" />
     <Content Include="Views\Pipeline\servantlist.cshtml" />
+    <Content Include="Views\test\index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

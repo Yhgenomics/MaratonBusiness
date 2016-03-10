@@ -29,7 +29,7 @@ namespace Message
 
         public List<int> Memory { get; set; }
 
-        public int Type { get; set; }
+        public List<int> Type { get; set; }
 
     }
 
@@ -81,9 +81,9 @@ namespace Message
 
         public List<string> Servants { get; set; }
 
-        public List<Message.MessagePipeline> Pipeline { get; set; }
+        public Message.MessagePipeline Pipeline { get; set; }
 
-        public bool IsMultiple { get; set; }
+        public bool IsParallel { get; set; }
 
     }
 

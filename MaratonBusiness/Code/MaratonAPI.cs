@@ -33,19 +33,21 @@ namespace MaratonBusiness.Code
             return msg;
         }
 
-
         public Message.MessageTaskDeliverReply TaskDeliver(DbTask task , DbPipeline line)
         {
             XSocket sock = new XSocket();
             Message.MessageTaskDeliverReply msg;
             sock.Connect(this.ip, this.port);
 
+            var servants = ServantList();
+
             Message.MessageTaskDeliver td = new Message.MessageTaskDeliver();
-            td.Id = task.Id;
+            td.Id = new Guid().ToString().Replace("-","");
             td.Input = task.Inputs;
-            td.Servants = task.Servants;
+            td.Servants = servants.Id;
             td.Resources = new List<string>();
             td.IsParallel = line.IsParallel;
+            td.OriginalID = td.Id;
             td.Pipeline = (new Message.MessagePipeline() {
                 Id = line.Id,
                 Name = line.Name,
@@ -57,13 +59,17 @@ namespace MaratonBusiness.Code
                 for (int i = 0; i < line.PipeIds.Count; i++)
                 {
                     var pipe = db.FindOne<DbPipe>(x => x.Id == line.PipeIds[i]);
-                    td.Pipeline.Pipes.Add(new Message.MessagePipe() {
+                    var p = new Message.MessagePipe()
+                    {
                         Id = pipe.Id,
                         Executor = pipe.Executor,
-                        MultipleInput = pipe.IsMultipleInput ,
-                        MultipleThread = pipe.IsMultipleThread ,
-                        Parameters = pipe.Parameters ,
-                        Name = pipe.Name  });
+                        MultipleInput = pipe.IsMultipleInput,
+                        MultipleThread = pipe.IsMultipleThread,
+                        Parameters = pipe.Parameters,
+                        Name = pipe.Name
+                    };
+                     
+                    td.Pipeline.Pipes.Add(p);
                 }
             }
 
@@ -73,4 +79,4 @@ namespace MaratonBusiness.Code
             return msg;
         }
     }
-}
+} 

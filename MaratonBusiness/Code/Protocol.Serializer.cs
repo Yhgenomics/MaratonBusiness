@@ -1511,6 +1511,10 @@ namespace Message
                     case 48:
                         instance.IsParallel = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadBool(stream);
                         continue;
+                    // Field 7 LengthDelimited
+                    case 58:
+                        instance.OriginalID = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadString(stream);
+                        continue;
                 }
 
                 var key = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadKey((byte)keyByte, stream);
@@ -1585,6 +1589,10 @@ namespace Message
                     case 48:
                         instance.IsParallel = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadBool(stream);
                         continue;
+                    // Field 7 LengthDelimited
+                    case 58:
+                        instance.OriginalID = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadString(stream);
+                        continue;
                 }
 
                 var key = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadKey((byte)keyByte, stream);
@@ -1658,6 +1666,10 @@ namespace Message
                     case 48:
                         instance.IsParallel = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadBool(stream);
                         continue;
+                    // Field 7 LengthDelimited
+                    case 58:
+                        instance.OriginalID = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadString(stream);
+                        continue;
                 }
 
                 var key = global::SilentOrbit.ProtocolBuffers.ProtocolParser.ReadKey((byte)keyByte, stream);
@@ -1726,6 +1738,11 @@ namespace Message
             // Key for field: 6, Varint
             stream.WriteByte(48);
             global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteBool(stream, instance.IsParallel);
+            if (instance.OriginalID == null)
+                throw new global::SilentOrbit.ProtocolBuffers.ProtocolBufferException("OriginalID is required by the proto specification.");
+            // Key for field: 7, LengthDelimited
+            stream.WriteByte(58);
+            global::SilentOrbit.ProtocolBuffers.ProtocolParser.WriteBytes(stream, Encoding.UTF8.GetBytes(instance.OriginalID));
             global::SilentOrbit.ProtocolBuffers.ProtocolParser.Stack.Push(msField);
         }
 

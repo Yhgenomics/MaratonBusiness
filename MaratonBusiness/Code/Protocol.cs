@@ -85,6 +85,8 @@ namespace Message
 
         public bool IsParallel { get; set; }
 
+        public string OriginalID { get; set; }
+
     }
 
     public partial class MessageTaskDeliverReply

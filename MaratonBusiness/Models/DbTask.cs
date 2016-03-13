@@ -13,6 +13,7 @@ namespace MaratonBusiness.Models
             Servants = new List<string>();
             Pipelines = new List<string>();
             Inputs = new List<string>();
+            Result = new List<string>();
         }
 
         public string Name { get; set; }
@@ -20,6 +21,8 @@ namespace MaratonBusiness.Models
         public List<string> Inputs { get; set; }
         public List<string> Servants { get; set; }
         public List<string> Pipelines { get; set; }
+
+        public List<string> Result { get; set; }
 
         public int State { get; set; }
         public DateTime CreateTime { get; set; }

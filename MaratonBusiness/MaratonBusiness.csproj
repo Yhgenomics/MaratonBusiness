@@ -146,6 +146,7 @@
     <Compile Include="Code\XSocket.cs" />
     <Compile Include="Controllers\callbackController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MaratonController.cs" />
     <Compile Include="Controllers\PipelineController.cs" />
     <Compile Include="Controllers\ServantController.cs" />
     <Compile Include="Controllers\TaskController.cs" />
@@ -159,6 +160,7 @@
     <Compile Include="Models\DbStep.cs" />
     <Compile Include="Models\DbPipe.cs" />
     <Compile Include="Models\DbTask.cs" />
+    <Compile Include="Models\MaratonResult.cs" />
     <Compile Include="Models\Pagination.cs" />
     <Compile Include="Models\VMTaskIndex.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -978,9 +980,11 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\jquery.zeroclipboard.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\ZeroClipboard.swf" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -1011,6 +1015,7 @@
     <Content Include="Views\Task\servantlist.cshtml" />
     <Content Include="Views\Pipeline\servantlist.cshtml" />
     <Content Include="Views\test\index.cshtml" />
+    <Content Include="Views\Task\result.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1021,6 +1026,7 @@
     <Folder Include="Proto\" />
     <Folder Include="Scripts\vendor\" />
     <Folder Include="Views\callback\" />
+    <Folder Include="Views\Maraton\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

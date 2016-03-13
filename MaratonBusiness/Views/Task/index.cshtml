@@ -4,6 +4,8 @@
     ViewBag.Title = "index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<script src="~/Scripts/jquery.zeroclipboard.min.js"></script>
+
 <ol class="breadcrumb">
     <li><a href="/">Home</a></li>
     <li><a href="@Url.Action("index","Task")">Task</a></li>
@@ -55,12 +57,22 @@
                             @item.CreateTime.ToString("yyyy-MM-dd hh:mm:ss")
                         </td>
                         <td>
-                            @if( item.State == 0)
+
+                            @if (item.State == 0)
                             {
                                 <a class="btn btn-info" href="@Url.Action("start", new { id = item.Id })">Start</a>
+                                <a class="btn btn-danger" href="@Url.Action("delete", new { id = item.Id })">Delete</a>
                             }
 
-                            <a class="btn btn-danger" href="@Url.Action("delete", new { id = item.Id })">Delete</a>
+                            @if (item.State == 3)
+                            {
+                                <a class="btn btn-success" href="@Url.Action("result", new { id = item.Id })" data-toggle="modal" data-target="#resultView">Result</a>
+                            }
+
+                            @if (item.State == 5)
+                            {
+                                <a class="btn btn-info" href="@Url.Action("restart", new { id = item.Id })">Restart</a>
+                            }
 
                         </td>
                     </tr>
@@ -69,6 +81,33 @@
         </table>
         <hr />
 
-        @Html.CreatePaginatio(Url,Model,"index","Task") 
+        @Html.CreatePaginatio(Url, Model, "index", "Task")
+
+
+        <div class="modal fade" id="resultView" tabindex="-1" role="dialog" aria-labelledby="resultView">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="myModalLabel">Result</h4>
+                    </div>
+                    <div id="resultContent" class="modal-body">
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+            $(document).ready(function ($) {
+                $("body")
+                  .on("copy", ".zclip", function (/* ClipboardEvent */ e) {
+                      e.clipboardData.clearData();
+                      e.clipboardData.setData("text/plain", $(this).data("zclip-text"));
+                      e.preventDefault();
+                  });
+            });
+        </script>
     </div>
 </div>

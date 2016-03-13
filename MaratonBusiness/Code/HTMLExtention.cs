@@ -20,7 +20,7 @@ namespace System.Web.Mvc
                     break;
                 case 1:
                     {
-                        ret = "info";
+                        ret = "warning";
                     }
                     break;
                 case 2:
@@ -29,6 +29,11 @@ namespace System.Web.Mvc
                     }
                     break;
                 case 3:
+                    {
+                        ret = "success";
+                    }
+                    break;
+                case 5:
                     {
                         ret = "danger";
                     }

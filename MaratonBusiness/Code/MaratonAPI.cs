@@ -42,7 +42,7 @@ namespace MaratonBusiness.Code
             var servants = ServantList();
 
             Message.MessageTaskDeliver td = new Message.MessageTaskDeliver();
-            td.Id = new Guid().ToString().Replace("-","");
+            td.Id = task.Id;
             td.Input = task.Inputs;
             td.Servants = servants.Id;
             td.Resources = new List<string>();

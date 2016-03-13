@@ -10,7 +10,14 @@ namespace MaratonBusiness.Controllers
 {
     public class callbackController : Controller
     {
-        public void pipelinefinish(string taskid,string pipelineid,int state)
+        [HttpPost]
+        public void state(string json)
+        {
+
+        }
+
+        [HttpPost]
+        public void result(string taskid,string pipelineid,int state)
         {
             using (MDB db = new MDB())
             {

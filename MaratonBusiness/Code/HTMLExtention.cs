@@ -11,7 +11,7 @@ namespace System.Web.Mvc
         public static MvcHtmlString CreateState(this HtmlHelper helper, int state)
         {
             string ret = "";
-            switch(state)
+            switch (state)
             {
                 case 0:
                     {
@@ -23,17 +23,17 @@ namespace System.Web.Mvc
                         ret = "warning";
                     }
                     break;
-                case 2:
+                case 302:
                     {
                         ret = "success";
                     }
                     break;
-                case 3:
+                case 303:
                     {
                         ret = "success";
                     }
                     break;
-                case 5:
+                case 305:
                     {
                         ret = "danger";
                     }
@@ -43,58 +43,58 @@ namespace System.Web.Mvc
             return MvcHtmlString.Create(ret);
         }
 
-        public static MvcHtmlString CreatePaginatio(this HtmlHelper helper ,UrlHelper url, MaratonBusiness.Models.Pagination Model , string action , string controller) 
+        public static MvcHtmlString CreatePaginatio(this HtmlHelper helper, UrlHelper url, MaratonBusiness.Models.Pagination Model, string action, string controller)
         {
             string html = "";
             html += @"
             <nav>
             <ul class='pagination pagination-sm'>";
 
-                if (Model.HasPreviewPage)
-                {
+            if (Model.HasPreviewPage)
+            {
                 html += @"<li>
-                        <a href='"+ url.Action(action ,controller, new { pageId = (Model.CurrentPage - 1) }) + @"' aria-label='Previous'>
+                        <a href='" + url.Action(action, controller, new { pageId = (Model.CurrentPage - 1) }) + @"' aria-label='Previous'>
                             <span aria-hidden='true'>&laquo;</span>
                         </a>
                     </li>";
-                }
-                else
-                {
-                html += @"<li>
+            }
+            else
+            {
+                html += @"<li class='disable'>
                         <a aria-label='Previous'>
                             <span aria-hidden='true'>&laquo;</span>
                         </a>
                     </li>";
-                } 
+            }
 
-                for (int i = 0; i < Model.PageNum; i++)
+            for (int i = 0; i < Model.PageNum; i++)
+            {
+                if (i == Model.CurrentPage)
                 {
-                    if (i == Model.CurrentPage)
-                    {
-                    html += @"<li class='active'><a>"+(i + 1)+@"</a></li>";
-                    }
-                    else
-                    {
-                    html += @"<li class='disabled'><a href='" + url.Action(action, controller, new { pageId = (i+1) }) + @"'>"+(i + 1)+@"</a></li>";
-                    }
-                }
-
-                if (Model.HasNextPage)
-                {
-                html += @"< li>
-                        <a href='" + url.Action(action, controller, new { pageId = (Model.CurrentPage + 1) }) + @"' aria-label='Next'>
-                            <span aria-hidden='true'>&raquo;</span>
-                        </a>
-                    </li>"; 
+                    html += @"<li class='active'><a>" + (i + 1) + @"</a></li>";
                 }
                 else
                 {
+                    html += @"<li class='enable'><a href='" + url.Action(action, controller, new { pageId = (i) }) + @"'>" + (i + 1) + @"</a></li>";
+                }
+            }
+
+            if (Model.HasNextPage)
+            {
                 html += @"<li>
+                        <a href='" + url.Action(action, controller, new { pageId = (Model.CurrentPage + 1) }) + @"' aria-label='Next'>
+                            <span aria-hidden='true'>&raquo;</span>
+                        </a>
+                    </li>";
+            }
+            else
+            {
+                html += @"<li class='disable'>
                         <a aria-label='Next'>
                             <span aria-hidden='true'>&raquo;</span>
                         </a>
                     </li>";
-                }
+            }
 
             html += @"</ul></nav>";
 

@@ -15,87 +15,87 @@ namespace Message
 {
     public partial class MessageServantState
     {
-        public int Code { get; set; }
+        public int code { get; set; }
 
     }
 
     public partial class MessageServantStateReply
     {
-        public List<string> Id { get; set; }
+        public string id { get; set; }
 
-        public List<int> State { get; set; }
+        public int state { get; set; }
 
-        public List<int> Cpu { get; set; }
+        public int cpu { get; set; }
 
-        public List<int> Memory { get; set; }
+        public int memory { get; set; }
 
-        public List<int> Type { get; set; }
+        public int type { get; set; }
 
     }
 
     public partial class MessageState
     {
-        public int Code { get; set; }
+        public int code { get; set; }
 
     }
 
     public partial class MessageStateReply
     {
-        public int Code { get; set; }
+        public int code { get; set; }
 
     }
 
     public partial class MessagePipe
     {
-        public string Id { get; set; }
+        public string id { get; set; }
 
-        public string Name { get; set; }
+        public string name { get; set; }
 
-        public string Executor { get; set; }
+        public string executor { get; set; }
 
-        public bool MultipleInput { get; set; }
+        public bool multipleInput { get; set; }
 
-        public bool MultipleThread { get; set; }
+        public bool multipleThread { get; set; }
 
-        public List<string> Parameters { get; set; }
+        public List<string> parameters { get; set; }
 
     }
 
     public partial class MessagePipeline
     {
-        public string Id { get; set; }
+        public string id { get; set; }
 
-        public string Name { get; set; }
+        public string name { get; set; }
 
-        public List<Message.MessagePipe> Pipes { get; set; }
+        public List<Message.MessagePipe> pipes { get; set; }
 
     }
 
     public partial class MessageTaskDeliver
     {
-        public string Id { get; set; }
+        public string id { get; set; }
 
-        public List<string> Resources { get; set; }
+        public List<string> resources { get; set; }
 
-        public List<string> Input { get; set; }
+        public List<string> input { get; set; }
 
-        public List<string> Servants { get; set; }
+        public List<string> servants { get; set; }
 
-        public Message.MessagePipeline Pipeline { get; set; }
+        public Message.MessagePipeline pipeline { get; set; }
 
-        public bool IsParallel { get; set; }
+        public bool isParallel { get; set; }
 
-        public string OriginalID { get; set; }
+        public string originalID { get; set; }
 
     }
 
     public partial class MessageTaskDeliverReply
     {
-        public string Taskid { get; set; }
+        public string taskid { get; set; }
 
-        public int Code { get; set; }
+        public int code { get; set; }
 
-        public string Message { get; set; }
+        public string message { get; set; }
 
     }
 

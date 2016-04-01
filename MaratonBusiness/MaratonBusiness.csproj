@@ -139,11 +139,7 @@
     <Compile Include="Code\HTMLExtention.cs" />
     <Compile Include="Code\MaratonAPI.cs" />
     <Compile Include="Code\MDB.cs" />
-    <Compile Include="Code\PackageReader.cs" />
     <Compile Include="Code\Protocol.cs" />
-    <Compile Include="Code\Protocol.Serializer.cs" />
-    <Compile Include="Code\ProtocolParser.cs" />
-    <Compile Include="Code\XSocket.cs" />
     <Compile Include="Controllers\callbackController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MaratonController.cs" />

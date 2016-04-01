@@ -1,7 +1,7 @@
 ﻿@{ 
     Layout = null;
 }
-@model Message.MessageServantStateReply
+@model List<Message.MessageServantStateReply>
  
 <div class="row">
     <div class="col-lg-12">
@@ -23,20 +23,20 @@
                 </tr>
             </thead>
             <tbody>
-                @for (int i = 0; i < Model.Id.Count; i++)
+                @foreach (var m in Model)
                 {
-                    <tr onclick="selectServant({ 'id' : '@Model.Id[i]'})">
+                    <tr onclick="selectServant({ 'id' : '@m.id'})">
                         <td>
-                            @Model.Id[i]
+                            @m.id
                         </td>
                         <td>
-                            @Model.State[i]
+                            @m.state
                         </td>
                         <td>
-                            @Model.Cpu[i]
+                            @m.cpu
                         </td>
                         <td>
-                            @Model.Memory[i]
+                            @m.memory
                         </td>
                     </tr>
                 }

@@ -31,7 +31,7 @@ namespace MaratonBusiness.Controllers
                     return;
                 }
 
-                if ( json.status == 3 )
+                if ( json.status == 303 )
                 {
 
                     for (int i = 0; i < task.Pipelines.Count; i++)
@@ -50,6 +50,8 @@ namespace MaratonBusiness.Controllers
                         {
                             task.State = json.status;
                             task.Result = json.data;
+                            task.FinishTime = DateTime.Now;
+                            task.Duratation = (int)((task.FinishTime - task.ExecuteTime).TotalSeconds);
                             mdb.UpdateOne<DbTask>(x => x.Id == json.taskid, task);
                         }
                     }

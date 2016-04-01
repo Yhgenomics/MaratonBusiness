@@ -64,12 +64,12 @@
                                 <a class="btn btn-danger" href="@Url.Action("delete", new { id = item.Id })">Delete</a>
                             }
 
-                            @if (item.State == 3)
+                            @if (item.State == 303)
                             {
-                                <a class="btn btn-success" href="@Url.Action("result", new { id = item.Id })" data-toggle="modal" data-target="#resultView">Result</a>
+                                <button class="btn btn-success" href="javascript:void(0)" data-url="@Url.Action("result", new { id = item.Id })" data-toggle="modal" data-target="#resultView">Result</button>
                             }
 
-                            @if (item.State == 5)
+                            @if (item.State == 305)
                             {
                                 <a class="btn btn-info" href="@Url.Action("restart", new { id = item.Id })">Restart</a>
                             }
@@ -85,7 +85,7 @@
 
 
         <div class="modal fade" id="resultView" tabindex="-1" role="dialog" aria-labelledby="resultView">
-            <div class="modal-dialog" role="document">
+            <div id="resultViewDoc" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h4 class="modal-title" id="myModalLabel">Result</h4>
@@ -101,6 +101,19 @@
         </div>
         <script>
             $(document).ready(function ($) {
+
+
+                $('#resultView').on('show.bs.modal', function (e) {
+                    var obj = $(e.relatedTarget);
+                    var url = obj.data('url');
+                    $('#resultViewDoc').html("<h1>Loading...</h1>");
+                    $.get(url, "", function (html) {
+                        $('#resultViewDoc').html(html);
+
+                    });
+                    //
+                })
+
                 $("body")
                   .on("copy", ".zclip", function (/* ClipboardEvent */ e) {
                       e.clipboardData.clearData();

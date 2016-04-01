@@ -15,8 +15,9 @@ namespace MaratonBusiness.Controllers
             VMTaskIndex mod = new VMTaskIndex();
             using (MDB db = new MDB())
             {
-                var t = db.Find<DbTask>(x => true).Skip(pageId.GetValueOrDefault() * mod.PageSize).Take(mod.PageSize).OrderByDescending(x=>x.CreateTime).ToList();
-                mod.Tasks = t;
+                var unstart = db.Find<DbTask>(x => x.State == 0).ToList();
+
+                mod.Tasks = db.Find<DbTask>(x => true).OrderBy(x => x.State).Skip(mod.CurrentPage * mod.PageSize).Take(mod.PageSize).ToList();
                 mod.TotalCount = db.Find<DbTask>(x => true).Count;
                 mod.CurrentPage = pageId.GetValueOrDefault();
             }
@@ -77,7 +78,7 @@ namespace MaratonBusiness.Controllers
                 MaratonAPI api = new MaratonAPI();
                 var result = api.TaskDeliver(task, pipeline);
 
-
+                task.ExecuteTime = DateTime.Now;
                 task.State = 1;
                 db.UpdateOne<DbTask>(x => x.Id == id, task);
                 //if( result.Code == 0 )

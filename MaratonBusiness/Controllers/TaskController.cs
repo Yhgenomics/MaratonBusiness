@@ -15,11 +15,9 @@ namespace MaratonBusiness.Controllers
             VMTaskIndex mod = new VMTaskIndex();
             using (MDB db = new MDB())
             {
-                var unstart = db.Find<DbTask>(x => x.State == 0).ToList();
-
-                mod.Tasks = db.Find<DbTask>(x => true).OrderBy(x => x.State).Skip(mod.CurrentPage * mod.PageSize).Take(mod.PageSize).ToList();
-                mod.TotalCount = db.Find<DbTask>(x => true).Count;
                 mod.CurrentPage = pageId.GetValueOrDefault();
+                mod.Tasks = db.Find<DbTask>(x => true).OrderByDescending(x=>x.Increase).Skip(mod.CurrentPage * mod.PageSize).Take(mod.PageSize).ToList();
+                mod.TotalCount = db.Find<DbTask>(x => true).Count;
             }
 
             return View(mod);

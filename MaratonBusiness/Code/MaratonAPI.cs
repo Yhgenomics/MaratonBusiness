@@ -19,8 +19,11 @@ namespace MaratonBusiness.Code
             return wc.UploadString("http://" + ip + url, "POST", json);
         }
 
-        T PostData<T>(string url , string json)
+        T PostData<T>(string url, string json)
         {
+            ip = System.Configuration.ConfigurationManager.AppSettings["MaratonIP"];
+            int.TryParse(System.Configuration.ConfigurationManager.AppSettings["MaratonPort"] , out port);
+
             WebClient wc = new WebClient();
             string data = wc.UploadString("http://" + ip+ ":" + port + url, "POST", json);
             try

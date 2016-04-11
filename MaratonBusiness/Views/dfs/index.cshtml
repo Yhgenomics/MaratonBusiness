@@ -1,0 +1,102 @@
+﻿@model MaratonBusiness.Models.DFSDir
+@{
+    ViewBag.Title = "edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class=".container-fluid body-content">
+    <div class="row">
+        <div>
+            @if (this.Request.Params["path"] == null)
+            {
+                <ol class="breadcrumb">
+                    <li><a href="@Url.Action("index", "dfs", new { path = "root" })">/</a></li>
+                </ol>
+            }
+            else
+            {
+                var split = new List<string>(this.Request.Params["path"].Split(new string[] { "/" }, StringSplitOptions.RemoveEmptyEntries));
+                split.Insert(0, "/");
+                var path = "";
+
+                <ol class="breadcrumb">
+
+                    @foreach (var item in split)
+                    {
+                        path += item;
+
+                        if (item == "/")
+                        {
+                            <li><a href="@Url.Action("index", "dfs", new { path = "/"  })">root</a></li>
+                        }
+                        else
+                        {
+                            <li><a href="@Url.Action("index", "dfs", new { path = path+"/" })">@item</a></li>
+                        }
+
+
+                    }
+
+                </ol>
+            }
+
+            <div class="list-group">
+                <a href="#" class="list-group-item active">
+                    Directory
+                </a>
+
+               
+
+                @foreach (var item in Model.Dir)
+                {
+                    <a href="@Url.Action("index", "dfs", new { path = "/"+item.Path + "/" })" class="list-group-item">@item.Path</a>
+                }
+
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div>
+            <div class="list-group">
+
+                <a href="#" class="list-group-item active">
+                    Files
+                </a>
+
+                @foreach (var item in Model.File)
+                {
+                    <a data-toggle="modal" data-target="#fileDetail" data-path="@item.Path" class="list-group-item">@Path.GetFileName(item.Path)</a>
+                }
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="fileDetail" tabindex="-1" role="dialog" aria-labelledby="fileDetail">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">File Information</h4>
+            </div>
+            <div id="fileDetailContent" class="modal-body">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $("#fileDetail").on('show.bs.modal', function (e) {
+            var obj = $(e.relatedTarget);
+            $.get("@Url.Action("FileDetail")", { path: obj.data("path") }, function (data, status, jxhr) {
+                $("#fileDetailContent").html(data);
+            });
+        }) 
+    });
+</script>

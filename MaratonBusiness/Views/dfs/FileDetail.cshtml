@@ -1,0 +1,54 @@
+﻿@model MaratonBusiness.Models.DFSFile
+@{
+    ViewBag.Title = "edit";
+    Layout = null;
+}
+<div class=".container-fluid body-content">
+    <div class="row">
+        <div class="col-lg-12">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <td>
+                            PartId
+                        </td>
+                        <td>
+                            Size
+                        </td>
+                        <td>
+                            NodeCount
+                        </td> 
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Block)
+                    {
+                        <tr>
+                            <td>
+                                @item.Partid
+                            </td>
+                            <td>
+                                @item.Size
+                            </td>
+                            <td>
+                                @item.Nodecount
+                            </td> 
+                        </tr>
+                        <tr>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                                @foreach (var n in item.Node)
+                                {
+                                    <p>@n.Address</p>
+                                }
+                            </td> 
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

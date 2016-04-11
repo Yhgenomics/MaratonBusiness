@@ -75,7 +75,9 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Web" />
+    <Reference Include="System.Web">
+      <Private>False</Private>
+    </Reference>
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Abstractions" />
     <Reference Include="System.Web.Routing" />
@@ -141,6 +143,7 @@
     <Compile Include="Code\MDB.cs" />
     <Compile Include="Code\Protocol.cs" />
     <Compile Include="Controllers\callbackController.cs" />
+    <Compile Include="Controllers\dfsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MaratonController.cs" />
     <Compile Include="Controllers\PipelineController.cs" />
@@ -156,6 +159,7 @@
     <Compile Include="Models\DbStep.cs" />
     <Compile Include="Models\DbPipe.cs" />
     <Compile Include="Models\DbTask.cs" />
+    <Compile Include="Models\DFSModel.cs" />
     <Compile Include="Models\MaratonResult.cs" />
     <Compile Include="Models\Pagination.cs" />
     <Compile Include="Models\VMTaskIndex.cs" />
@@ -1012,6 +1016,9 @@
     <Content Include="Views\Pipeline\servantlist.cshtml" />
     <Content Include="Views\test\index.cshtml" />
     <Content Include="Views\Task\result.cshtml" />
+    <Content Include="Views\dfs\index.cshtml" />
+    <Content Include="Views\dfs\node.cshtml" />
+    <Content Include="Views\dfs\FileDetail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

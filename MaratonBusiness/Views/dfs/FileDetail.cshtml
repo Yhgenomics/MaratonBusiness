@@ -5,6 +5,28 @@
 }
 <div class=".container-fluid body-content">
     <div class="row">
+
+        <div class="col-lg-2">
+            <p>Path</p>
+        </div>
+
+        <div class="col-lg-10" style="word-wrap: break-word;word-break: normal;">
+           <span class="text-justify">@(Model.Path)</span>
+        </div>
+    </div>
+
+    <div class="row">
+
+        <div class="col-lg-2">
+            <p>Size</p>
+        </div>
+
+        <div class="col-lg-10">
+            <span>@Model.Size (@(Model.Size / (1024.0f * 1024.0f))MB)</span>
+</div>
+    </div>
+
+    <div class="row"> 
         <div class="col-lg-12">
             <table class="table table-hover">
                 <thead>
@@ -17,7 +39,8 @@
                         </td>
                         <td>
                             NodeCount
-                        </td> 
+                        </td>
+                        <td></td>
                     </tr>
                 </thead>
                 <tbody>
@@ -32,19 +55,13 @@
                             </td>
                             <td>
                                 @item.Nodecount
-                            </td> 
-                        </tr>
-                        <tr>
-                            <td>
-                            </td>
-                            <td>
                             </td>
                             <td>
                                 @foreach (var n in item.Node)
                                 {
-                                    <p>@n.Address</p>
+                                    @n.Address<br />
                                 }
-                            </td> 
+                            </td>
                         </tr>
                     }
                 </tbody>

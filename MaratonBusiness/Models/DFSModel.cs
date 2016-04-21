@@ -13,9 +13,9 @@ namespace MaratonBusiness.Models
 
     public class DFSDirFile
     {
-        public int Blockcount { get; set; }
+        public Int64 Blockcount { get; set; }
         public string Path { get; set; }
-        public int Size { get; set; }
+        public Int64 Size { get; set; }
     }
 
     public class DFSDir
@@ -27,9 +27,9 @@ namespace MaratonBusiness.Models
         }
 
         public IEnumerable<DFSDirInfo> Dir { get; set; }
-        public int Dircount { get; set; }
+        public Int64 Dircount { get; set; }
         public IEnumerable<DFSDirFile> File { get; set; }
-        public int Filecount { get; set; }
+        public Int64 Filecount { get; set; }
     }
     #endregion
 
@@ -49,7 +49,7 @@ namespace MaratonBusiness.Models
         public IEnumerable<DFSFileNode> Node { get; set; }
         public int Nodecount { get; set; }
         public int Partid { get; set; }
-        public int Size { get; set; }
+        public Int64 Size { get; set; }
     }
 
     public class DFSFile
@@ -59,9 +59,9 @@ namespace MaratonBusiness.Models
             this.Block = new List<DFSFileBlock>();
         }
 
-        public IEnumerable<DFSFileBlock> Block { get; set; }
+        public List<DFSFileBlock> Block { get; set; }
         public string Path { get; set; }
-        public int Size { get; set; }
+        public Int64 Size { get; set; }
     }
     #endregion
 
@@ -72,7 +72,7 @@ namespace MaratonBusiness.Models
         public int Alive { get; set; }
         public int Blockcount { get; set; }
         public int Cpu { get; set; }
-        public long Memory { get; set; }
+        public Int64 Memory { get; set; }
     }
     #endregion
 

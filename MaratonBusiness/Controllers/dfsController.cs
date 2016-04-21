@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -47,10 +48,17 @@ namespace MaratonBusiness.Controllers
             try
             {
                 var result = Newtonsoft.Json.JsonConvert.DeserializeObject<Models.DFSDir>(jsonstr);
+                if(result==null)
+                    result = new Models.DFSDir();
+
+                result.File = (from j in result.File orderby j.Path select j).ToList();
+
+
                 return View(result);
             }
-            catch
+            catch(Exception eee)
             {
+                Debug.Print(eee.Message);
                 return View(new Models.DFSDir());
             }
 
@@ -62,6 +70,12 @@ namespace MaratonBusiness.Controllers
             try
             {
                 var result = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Models.DFSNodeMeta>>(jsonstr);
+
+                if (result == null)
+                {
+                    result = new List<Models.DFSNodeMeta>();
+                }
+
                 return View(result);
             }
             catch
@@ -77,6 +91,7 @@ namespace MaratonBusiness.Controllers
             try
             {
                 var result = Newtonsoft.Json.JsonConvert.DeserializeObject<Models.DFSFile>(jsonstr);
+                result.Block = (from j in result.Block orderby j.Partid select j).ToList();
                 return View(result);
             }
             catch

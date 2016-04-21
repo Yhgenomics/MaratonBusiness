@@ -6,11 +6,12 @@
 
 <div class=".container-fluid body-content">
     <div class="row">
-        <div>
-            @if (this.Request.Params["path"] == null)
+        <div class="col-md-12">
+            @if ( this.Request.Params["path"] == null ||
+                  this.Request.Params["path"] == "/")
             {
                 <ol class="breadcrumb">
-                    <li><a href="@Url.Action("index", "dfs", new { path = "root" })">/</a></li>
+                    <li><a href="@Url.Action("index", "dfs", new { path = "/" })">root</a></li>
                 </ol>
             }
             else
@@ -20,7 +21,6 @@
                 var path = "";
 
                 <ol class="breadcrumb">
-
                     @foreach (var item in split)
                     {
                         path += item;
@@ -33,31 +33,55 @@
                         {
                             <li><a href="@Url.Action("index", "dfs", new { path = path+"/" })">@item</a></li>
                         }
-
-
                     }
-
                 </ol>
             }
-
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
             <div class="list-group">
                 <a href="#" class="list-group-item active">
                     Directory
                 </a>
 
-               
+                @if (this.Request.Params["path"] == null ||
+                  this.Request.Params["path"] == "/")
+                {
+
+                }
+                else
+                {
+                    var split = new List<string>(this.Request.Params["path"].Split(new string[] { "/" }, StringSplitOptions.RemoveEmptyEntries));
+                    split.Insert(0, "/");
+                    split.RemoveAt(split.Count - 1);
+                    var path = "";
+
+                    foreach (var item in split)
+                    {
+                        path += item;
+                    }
+
+                    if (path == "/")
+                    {
+                        <a href="@Url.Action("index", "dfs", new { path = path })" class="list-group-item">...</a>
+                    }
+                    else
+                    {
+                        <a href="@Url.Action("index", "dfs", new { path = path + "/" })" class="list-group-item">...</a>
+                    }
+                }
+
 
                 @foreach (var item in Model.Dir)
                 {
-                    <a href="@Url.Action("index", "dfs", new { path = "/"+item.Path + "/" })" class="list-group-item">@item.Path</a>
+                    <a href="@Url.Action("index", "dfs", new { path = this.Request.Params["path"] + item.Path + "/" })" class="list-group-item">@item.Path</a>
                 }
 
             </div>
         </div>
-    </div>
 
-    <div class="row">
-        <div>
+        <div class="col-md-8">
             <div class="list-group">
 
                 <a href="#" class="list-group-item active">
@@ -66,19 +90,20 @@
 
                 @foreach (var item in Model.File)
                 {
-                    <a data-toggle="modal" data-target="#fileDetail" data-path="@item.Path" class="list-group-item">@Path.GetFileName(item.Path)</a>
+                    <a data-toggle="modal" data-target="#fileDetail" data-path="@item.Path" class="list-group-item"><span class="badge">@(item.Size / (1024 * 1024))MB</span> @Path.GetFileName(item.Path) </a>
                 }
 
             </div>
         </div>
     </div>
+     
 </div>
 
 <div class="modal fade" id="fileDetail" tabindex="-1" role="dialog" aria-labelledby="fileDetail">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="myModalLabel">File Information</h4>
+                <h4 class="modal-title" id="myModalLabel">File Block Information</h4>
             </div>
             <div id="fileDetailContent" class="modal-body">
 

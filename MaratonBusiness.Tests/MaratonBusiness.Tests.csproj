@@ -91,12 +91,6 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\MaratonBusiness\MaratonBusiness.csproj">
-      <Project>{C4ABE82E-23DD-4BA6-9B72-01EEFBDAFAD8}</Project>
-      <Name>MaratonBusiness</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.

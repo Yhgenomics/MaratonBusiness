@@ -1,4 +1,0 @@
-message MessageState
-{
-    required int32 code = 0;
-}

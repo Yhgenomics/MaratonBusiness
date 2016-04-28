@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading;
 using System.Web;
 
-namespace MaratonBusiness.Models
+namespace MRTBusiness.Models
 {
     public class CFService
     {

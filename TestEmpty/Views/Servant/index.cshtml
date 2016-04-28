@@ -1,0 +1,51 @@
+﻿@model List<Message.MessageServantStateReply>
+@{
+    ViewBag.Title = "index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<ol class="breadcrumb">
+    <li><a href="/">Home</a></li>
+    <li><a href="@Url.Action("index","Servant")">Servant</a></li>
+</ol>
+<hr />
+<div class="row">
+    <div class="col-lg-12">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <td>
+                        #
+                    </td>
+                    <td>
+                        Status
+                    </td>
+                    <td>
+                        CPU
+                    </td>
+                    <td>
+                        Memory
+                    </td>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var m in Model)
+                {
+                    <tr onclick="selectServant({ 'id' : '@m.id'})">
+                        <td>
+                            @m.id
+                        </td>
+                        <td>
+                            @m.state
+                        </td>
+                        <td>
+                            @m.cpu
+                        </td>
+                        <td>
+                            @m.memory
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

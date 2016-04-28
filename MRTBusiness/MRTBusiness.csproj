@@ -122,8 +122,8 @@
       <Private>True</Private>
       <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
-    <Reference Include="WebGrease, Version=1.6.5135.21930, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
+    <Reference Include="WebGrease, Version=1.5.2.14234, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
       <Private>True</Private>
     </Reference>
   </ItemGroup>
@@ -136,6 +136,8 @@
     <Compile Include="Code\MDB.cs" />
     <Compile Include="Code\MelotonAPI.cs" />
     <Compile Include="Code\Protocol.cs" />
+    <Compile Include="Code\YHFSUploader.cs" />
+    <Compile Include="Controllers\attachmentController.cs" />
     <Compile Include="Controllers\callbackController.cs" />
     <Compile Include="Controllers\dfsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -150,6 +152,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\CFService.cs" />
+    <Compile Include="Models\DbAttachment.cs" />
     <Compile Include="Models\DbModel.cs" />
     <Compile Include="Models\DbPipe.cs" />
     <Compile Include="Models\DbPipeline.cs" />
@@ -171,12 +174,15 @@
     <Content Include="Content\font-awesome-ie7.min.css" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
+    <Content Include="Content\uploadify-cancel.png" />
+    <Content Include="Content\uploadify.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Images\favicon.ico" />
+    <Content Include="Images\hourglass.png" />
     <Content Include="Images\icons\png\Book.png" />
     <Content Include="Images\icons\png\Calendar.png" />
     <Content Include="Images\icons\png\Chat.png" />
@@ -210,8 +216,16 @@
     <Content Include="Images\login\imac-2x.png" />
     <Content Include="Images\login\imac.png" />
     <Content Include="Images\logo.png" />
+    <Content Include="Images\processing.png" />
+    <Content Include="Images\process_ok.png" />
+    <Content Include="Images\sequence.png" />
+    <Content Include="Images\tag.png" />
     <Content Include="Images\tile\ribbon-2x.png" />
     <Content Include="Images\tile\ribbon.png" />
+    <Content Include="Images\waiting.png" />
+    <Content Include="Images\warning.png" />
+    <Content Include="Scripts\jquery.uploadify.min.js" />
+    <Content Include="Scripts\uploadify.swf" />
     <Content Include="Scripts\angular-animate.js" />
     <Content Include="Scripts\angular-animate.min.js" />
     <Content Include="Scripts\angular-aria.js" />
@@ -306,6 +320,7 @@
     <Content Include="Views\Task\result.cshtml" />
     <Content Include="Views\Task\servantlist.cshtml" />
     <Content Include="Views\test\index.cshtml" />
+    <Content Include="Views\attachment\index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

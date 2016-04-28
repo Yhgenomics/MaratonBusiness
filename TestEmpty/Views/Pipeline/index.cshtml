@@ -1,0 +1,101 @@
+﻿@model IEnumerable<MaratonBusiness.Models.DbPipeline>
+
+@{
+    ViewBag.Title = "index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<ol class="breadcrumb">
+    <li><a href="/">Home</a></li>
+    <li><a href="@Url.Action("index","Pipeline")">Pipeline</a></li>
+</ol>
+<div class="row">
+    <div class="col-lg-12">
+        <a href="@Url.Action("create", new { })" class="btn btn-info">Create</a>
+    </div>
+</div> 
+<hr />
+<div class="row">
+    <div class="col-lg-12">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <td>
+                        #
+                    </td>
+                    <td>
+                        Name
+                    </td>
+                    <td>
+                        Pipe Count
+                    </td> 
+                    <td>
+                        IsParallel
+                    </td>
+                    <td>
+                        Servant Count
+                    </td> 
+                    <td>
+                        Edit
+                    </td>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model != null)
+                {
+                    foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @item.Id
+                            </td>
+                            <td>
+                                @item.Name
+                            </td>
+                            <td>
+                                @item.PipeIds.Count
+                            </td>
+                            <td>
+                                @if( item.IsParallel )
+                                {
+                                    <span class="glyphicon glyphicon-ok"></span>
+                                }
+                                else
+                                {
+                                    <span class="glyphicon glyphicon-remove"></span>
+                                }
+                            </td>
+                            <td>
+                                @item.ServantIds.Count
+                            </td>
+                            <td>
+                                @*<a href="@Url.Action("edit", new { id=item.Id })" class="btn btn-info"><i class="icon-pencil"></i> Edit</a>*@
+
+                                <div id="mod_@item.Id" class="modal fade">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h4 class="modal-title">Confirm</h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p>Are you sure to delete?</p>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                                                <a type="button" class="btn btn-primary" href="@Url.Action("delete", new { id = item.Id })">Yes</a>
+                                            </div>
+                                        </div><!-- /.modal-content -->
+                                    </div><!-- /.modal-dialog -->
+                                </div><!-- /.modal -->
+
+                                <button class="btn btn-danger" data-toggle="modal" data-target="#mod_@item.Id">
+                                    <i class="icon-trash icon-large"></i> Delete
+                                </button>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

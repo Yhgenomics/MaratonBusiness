@@ -1,4 +1,4 @@
-﻿@model MaratonBusiness.Models.VMTaskIndex
+﻿@model MRTBusiness.Models.VMTaskIndex
 
 @{
     ViewBag.Title = "index";
@@ -39,7 +39,7 @@
                         Edit
                     </td>
                 </tr>
-            </thead>
+            </thead> 
             <tbody>
                 @foreach (var item in Model.Tasks)
                 {
@@ -51,16 +51,21 @@
                             @item.Name
                         </td>
                         <td>
-                            @item.State
+                            @Html.CreateStateIcon(item.State)
                         </td>
                         <td>
-                            @item.CreateTime.ToString("yyyy-MM-dd hh:mm:ss")
+                            @item.CreateTime.ToString("yyyy-MM-dd HH:mm:ss")
                         </td>
                         <td>
 
                             @if (item.State == 0)
                             {
                                 <a class="btn btn-info" href="@Url.Action("start", new { id = item.Id })">Start</a>
+                                <a class="btn btn-danger" href="@Url.Action("delete", new { id = item.Id })">Delete</a>
+                            }
+
+                            @if (item.State == 2)
+                            {
                                 <a class="btn btn-danger" href="@Url.Action("delete", new { id = item.Id })">Delete</a>
                             }
 

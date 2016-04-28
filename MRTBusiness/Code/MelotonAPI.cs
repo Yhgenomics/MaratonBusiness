@@ -4,7 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 
-namespace MaratonBusiness.Code
+namespace MRTBusiness.Code
 {
     public class MelotonAPI
     {

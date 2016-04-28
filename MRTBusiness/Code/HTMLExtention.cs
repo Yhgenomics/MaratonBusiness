@@ -8,6 +8,45 @@ namespace System.Web.Mvc
 {
     public static class HtmlHelperExtention
     {
+        public static MvcHtmlString CreateStateIcon(this HtmlHelper helper, int state)
+        {
+            string ret = "";
+            switch (state)
+            {
+                case 0:
+                    {
+                        ret = "<img width='35' src='/Images/tag.png' />";
+                    }
+                    break;
+                case 1:
+                    {
+                        ret = "<img width='35' src='/Images/waiting.png' />";
+                    }
+                    break;
+                case 2:
+                    {
+                        ret = "<img width='35' src='/Images/sequence.png' />";
+                    }
+                    break;
+                case 302:
+                    {
+                        ret = "<img src='' />";
+                    }
+                    break;
+                case 303:
+                    {
+                        ret = "<img width='35' src='/Images/process_ok.png' />";
+                    }
+                    break;
+                case 305:
+                    {
+                        ret = "<img width='35' src='/Images/warning.png' />";
+                    }
+                    break;
+            }
+
+            return MvcHtmlString.Create(ret);
+        }
         public static MvcHtmlString CreateState(this HtmlHelper helper, int state)
         {
             string ret = "";
@@ -21,6 +60,11 @@ namespace System.Web.Mvc
                 case 1:
                     {
                         ret = "warning";
+                    }
+                    break;
+                case 2:
+                    {
+                        ret = "info";
                     }
                     break;
                 case 302:
@@ -43,7 +87,7 @@ namespace System.Web.Mvc
             return MvcHtmlString.Create(ret);
         }
 
-        public static MvcHtmlString CreatePaginatio(this HtmlHelper helper, UrlHelper url, MaratonBusiness.Models.Pagination Model, string action, string controller)
+        public static MvcHtmlString CreatePaginatio(this HtmlHelper helper, UrlHelper url, MRTBusiness.Models.Pagination Model, string action, string controller)
         {
             string html = "";
             html += @"

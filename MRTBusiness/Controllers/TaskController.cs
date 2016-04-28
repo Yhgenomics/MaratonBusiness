@@ -1,12 +1,12 @@
-﻿using MaratonBusiness.Code;
-using MaratonBusiness.Models;
+﻿using MRTBusiness.Code;
+using MRTBusiness.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace MaratonBusiness.Controllers
+namespace MRTBusiness.Controllers
 {
     public class TaskController : Controller
     {
@@ -75,14 +75,18 @@ namespace MaratonBusiness.Controllers
 
                 MaratonAPI api = new MaratonAPI();
                 var result = api.TaskDeliver(task, pipeline);
-
-                task.ExecuteTime = DateTime.Now;
-                task.State = 1;
-                db.UpdateOne<DbTask>(x => x.Id == id, task);
-                //if( result.Code == 0 )
-                //{
-
-                //}
+               
+                if (result.code == 0)
+                {
+                    task.ExecuteTime = DateTime.Now;
+                    task.State = 1;
+                    db.UpdateOne<DbTask>(x => x.Id == id, task);
+                } 
+                else
+                {
+                    task.State = 2;
+                    db.UpdateOne<DbTask>(x => x.Id == id, task);
+                }
             }
 
             return RedirectToAction("index");

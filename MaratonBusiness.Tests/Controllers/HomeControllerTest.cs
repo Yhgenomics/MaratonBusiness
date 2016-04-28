@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Web.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using MaratonBusiness;
-using MaratonBusiness.Controllers;
+using MRTBusiness;
+using MRTBusiness.Controllers;
 
-namespace MaratonBusiness.Tests.Controllers
+namespace MRTBusiness.Tests.Controllers
 {
     [TestClass]
     public class HomeControllerTest

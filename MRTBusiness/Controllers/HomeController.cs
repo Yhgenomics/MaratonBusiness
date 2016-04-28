@@ -1,12 +1,12 @@
-﻿using MaratonBusiness.Code;
-using MaratonBusiness.Models;
+﻿using MRTBusiness.Code;
+using MRTBusiness.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace MaratonBusiness.Controllers
+namespace MRTBusiness.Controllers
 {
     public class HomeController : Controller
     {

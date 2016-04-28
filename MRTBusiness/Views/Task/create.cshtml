@@ -1,4 +1,4 @@
-﻿@model MaratonBusiness.Models.DbTask
+﻿@model MRTBusiness.Models.DbTask
 
 @{
     ViewBag.Title = "create";
@@ -29,7 +29,7 @@
         <div class="form-group">
             <label class="control-label col-md-2">Input</label>
             <div class="col-md-10">
-               @Html.TextArea("Inputs")
+                <textarea cols="20" id="Inputs" name="Inputs" rows="2">@this.Request.Params["inputs"]</textarea>
             </div>
         </div>
  
@@ -40,17 +40,6 @@
                 <p><a href="#" class="btn btn-success" data-toggle="modal" data-target="#pipelineView"><span class="glyphicon glyphicon-plus"></span></a></p>
 
                 <div id="pipelinelist">
-                </div>
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.Hidden("Servants")
-            <label class="control-label col-md-2">Servants</label>
-            <div class="col-md-10">
-                <p><a href="#" class="btn btn-success" data-toggle="modal" data-target="#servantView"><span class="glyphicon glyphicon-plus"></span></a></p>
-
-                <div id="servantlist">
                 </div>
             </div>
         </div>

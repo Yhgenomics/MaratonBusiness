@@ -1,9 +1,10 @@
-﻿using System;
+﻿using MongoDB.Bson.Serialization.Attributes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace MaratonBusiness.Models
+namespace MRTBusiness.Models
 {
     public class DbTask : DbModel
     {
@@ -25,8 +26,11 @@ namespace MaratonBusiness.Models
         public List<string> Result { get; set; }
 
         public int State { get; set; }
+        [BsonDateTimeOptions(Kind = DateTimeKind.Local)]
         public DateTime CreateTime { get; set; }
+        [BsonDateTimeOptions(Kind = DateTimeKind.Local)]
         public DateTime ExecuteTime { get; set; }
+        [BsonDateTimeOptions(Kind = DateTimeKind.Local)]
         public DateTime FinishTime { get; set; }
         public int Duratation { get; set; }
     }

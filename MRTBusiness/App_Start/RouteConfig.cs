@@ -16,7 +16,7 @@ namespace MRTBusiness
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "index", id = UrlParameter.Optional }
+                defaults: new { controller = "Task", action = "index", id = UrlParameter.Optional }
             );
         }
     }

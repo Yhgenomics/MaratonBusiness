@@ -4,11 +4,11 @@ using System.Linq;
 using System.Web;
 using MongoDB.Driver;
 using MongoDB.Bson;
-using MaratonBusiness.Models;
+using MRTBusiness.Models;
 using System.Linq.Expressions;
 using System.Reflection;
 
-namespace MaratonBusiness.Code
+namespace MRTBusiness.Code
 {
     public class MDB : IDisposable
     {
@@ -16,7 +16,7 @@ namespace MaratonBusiness.Code
         MongoDB.Driver.IMongoDatabase db;
         public MDB()
         {
-            client = new MongoClient("mongodb://10.0.0.20/MBM");
+            client = new MongoClient("mongodb://10.0.0.100/MBM");
             db = client.GetDatabase("MBM");
         }
 

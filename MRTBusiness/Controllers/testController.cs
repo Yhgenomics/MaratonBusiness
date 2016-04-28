@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace MaratonBusiness.Controllers
+namespace MRTBusiness.Controllers
 {
     public class testController : Controller
     {

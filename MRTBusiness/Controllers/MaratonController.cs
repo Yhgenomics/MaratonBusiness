@@ -1,15 +1,54 @@
-﻿using MaratonBusiness.Code;
-using MaratonBusiness.Models;
+﻿using MRTBusiness.Code;
+using MRTBusiness.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace MaratonBusiness.Controllers
+namespace MRTBusiness.Controllers
 {
     public class MaratonController : Controller
     {
+        bool TryFinishTask(MaratonResult json , DbTask task , DbPipeline pipeline)
+        {
+            MaratonAPI api = new MaratonAPI();
+            using (MDB mdb = new MDB())
+            {
+                if (json.status == 303)
+                {
+                    for (int i = 0; i < task.Pipelines.Count; i++)
+                    {
+                        if (task.Pipelines[i] != pipeline.Id)
+                            continue;
+
+                        if (i < (task.Pipelines.Count - 1))
+                        {
+                            var p = mdb.FindOne<DbPipeline>(x => x.Id == task.Pipelines[i + 1]);
+                            task.Inputs = json.data;
+                            api.TaskDeliver(task, p);
+                            return true;
+                        }
+                        else if (i == (task.Pipelines.Count - 1))
+                        {
+                            task.State = json.status;
+                            task.Result = json.data;
+                            task.FinishTime = DateTime.Now;
+                            task.Duratation = (int)((task.FinishTime - task.ExecuteTime).TotalSeconds);
+                            mdb.UpdateOne<DbTask>(x => x.Id == json.taskid, task);
+                            return true;
+                        }
+                    }
+                    return true;
+                }
+                else
+                {
+                    task.State = json.status;
+                    mdb.UpdateOne<DbTask>(x => x.Id == json.taskid, task);
+                    return true;
+                }
+            }
+        }
         [HttpPost]
         public void result(MaratonResult json)
         {
@@ -31,35 +70,26 @@ namespace MaratonBusiness.Controllers
                     return;
                 }
 
-                if ( json.status == 303 )
+                TryFinishTask(json, task, pipeline);
+
+                var newTask = mdb.Find<DbTask>(x => x.State == 2).FirstOrDefault();
+                var newpipeline = mdb.Find<DbPipeline>(x => x.Id == newTask.Pipelines[0]).FirstOrDefault();
+
+                if (newTask == null) return;
+                if (newpipeline == null) return;
+
+                var result = api.TaskDeliver(newTask, newpipeline);
+
+                if (result.code == 0)
                 {
-
-                    for (int i = 0; i < task.Pipelines.Count; i++)
-                    {
-                        if (task.Pipelines[i] != pipeline.Id)
-                            continue;
-
-                        if ( i < (task.Pipelines.Count - 1) )
-                        {
-                            var p = mdb.FindOne<DbPipeline>(x => x.Id == task.Pipelines[i + 1]);
-                            task.Inputs = json.data;
-                            api.TaskDeliver(task, p);
-                            return;
-                        }
-                        else if (i == (task.Pipelines.Count - 1))
-                        {
-                            task.State = json.status;
-                            task.Result = json.data;
-                            task.FinishTime = DateTime.Now;
-                            task.Duratation = (int)((task.FinishTime - task.ExecuteTime).TotalSeconds);
-                            mdb.UpdateOne<DbTask>(x => x.Id == json.taskid, task);
-                        }
-                    }
+                    newTask.ExecuteTime = DateTime.Now;
+                    newTask.State = 1;
+                    mdb.UpdateOne<DbTask>(x => x.Id == newTask.Id, newTask);
                 }
                 else
                 {
-                    task.State = json.status;
-                    mdb.UpdateOne<DbTask>(x => x.Id == json.taskid, task);
+                    newTask.State = 2;
+                    mdb.UpdateOne<DbTask>(x => x.Id == newTask.Id, newTask);
                 }
             }
         }

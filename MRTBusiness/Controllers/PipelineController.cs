@@ -16,7 +16,6 @@ namespace MRTBusiness.Controllers
                 var pps = db.Find<Models.DbPipeline>(x => true).ToList();
                 return View(pps);
             }
-            return View();
         }
 
         public ActionResult pipelist()

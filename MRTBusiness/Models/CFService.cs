@@ -14,7 +14,6 @@ namespace MRTBusiness.Models
         public string MelotonAddress { get; set; }
         public int MelotonPort { get; set; }
 
-
         static Mutex safe_config_mutex = new Mutex();
         public void Save()
         {
@@ -22,31 +21,32 @@ namespace MRTBusiness.Models
             var json = Newtonsoft.Json.JsonConvert.SerializeObject(this);
             try
             {
-                System.IO.File.WriteAllText( HttpContext.Current.Server.MapPath("~") + "\\service.json", json );
+                System.IO.File.WriteAllText( HttpContext.Current.Server.MapPath("~") + "service.json", json );
             }
-            catch {
+            catch
+            {
 
             }
             safe_config_mutex.ReleaseMutex();
         }
 
-
         static public CFService Config()
         {
             CFService result = null;
             safe_config_mutex.WaitOne();
+
             try
             {
-                var json = System.IO.File.ReadAllText(HttpContext.Current.Server.MapPath("~") + "\\service.json");
+                var json = System.IO.File.ReadAllText(HttpContext.Current.Server.MapPath("~") + "service.json");
                 result = Newtonsoft.Json.JsonConvert.DeserializeObject<CFService>(json);
             }
             catch
             {
                 result = new CFService();
             }
+
             safe_config_mutex.ReleaseMutex();
             return result;
         }
-
     }
 }

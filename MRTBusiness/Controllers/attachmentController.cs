@@ -76,7 +76,7 @@ namespace MRTBusiness.Controllers
                         DbAttachment dbAttr = new DbAttachment();
                         dbAttr.Name = name;
                         dbAttr.Path = localPath;
-                        dbAttr.RemotePath = "/fastq/" + DateTime.Now.ToString("yyyy_MM_dd") + "/" + dbAttr.Id + ".fastq";
+                        dbAttr.RemotePath = "/website/" + DateTime.Now.ToString("yyyy_MM_dd") + "/" + DateTime.Now.ToString("HH_mm_ss")+"_" + dbAttr.Name;
                         dbAttr.CreateTime = DateTime.Now;
                         dbAttr.State = 0;
                         mdb.Insert<DbAttachment>(dbAttr);

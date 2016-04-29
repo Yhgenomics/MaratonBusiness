@@ -19,8 +19,6 @@ namespace MRTBusiness.Controllers
                 var dbt = mdb.Document<DbPipe>().Find(x => true).ToCursor().ToList();
                 return View(dbt);
             }
-
-            return View();
         }
 
         public ActionResult create()
@@ -51,8 +49,6 @@ namespace MRTBusiness.Controllers
                 var dbt = mdb.Document<DbPipe>().Find(x => x.Id == id).ToCursor().FirstOrDefault();
                 return View(dbt);
             }
-
-            return View();
         }
 
         [HttpPost]

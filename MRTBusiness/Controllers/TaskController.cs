@@ -45,7 +45,15 @@ namespace MRTBusiness.Controllers
             task.CreateTime = DateTime.Now;
             task.Inputs.AddRange(form["Inputs"].Split(new string[] { "\r", "\n" }, StringSplitOptions.RemoveEmptyEntries));
             task.Pipelines.AddRange(form["Pipelines"].Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries));
-            task.Servants.AddRange(form["Servants"].Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries));
+
+            MaratonAPI api = new MaratonAPI();
+            var ls = api.ServantList();
+
+            foreach (var item in ls)
+            {
+                task.Servants.Add(item.id);
+            }
+           
             task.State = 0;
 
             using (MDB db = new MDB())

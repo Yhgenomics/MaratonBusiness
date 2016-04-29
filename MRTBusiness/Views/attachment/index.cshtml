@@ -9,32 +9,82 @@
     <li><a href="@Url.Action("index","attachment")">Servant</a></li>
 </ol>
 <hr />
+<script src="//cdn.bootcss.com/plupload/2.1.8/plupload.full.min.js"></script>
+<div class="row">
+    <div class="col-md-12">
+        <script>
+                $(document).ready(function () {
 
-<link href="~/Content/uploadify.css" rel="stylesheet" />
-<script src="~/Scripts/jquery.uploadify.min.js"></script>
+                    var uploader = new plupload.Uploader({
+                        runtimes: 'html5',
+                        browse_button: 'pickfiles', // you can pass an id...
+                        container: document.getElementById('container'), // ... or DOM Element itself
+                        url: '@Url.Action("upload")',
+                        flash_swf_url: 'http://cdn.bootcss.com/plupload/2.1.8/Moxie.swf',
+                        method: 'post',
+                        chunk_size: '1mb',
+                        max_retries: 100,
+                        filters: {
+                            max_file_size: '2000mb',
+                            mime_types: [
+                                { title: "fastq", extensions: "fastq" },
+                                { title: "Image files", extensions: "jpg,gif,png" },
+                                { title: "Zip files", extensions: "zip" }
+                            ]
+                        },
 
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-md-12">
-            
-            <script>
-                $(function () {
-                    $("#file_upload_1").uploadify({
-                        width: 120,
-                        height: 30,
-                        swf: '@Url.Content("/Scripts/uploadify.swf")',
-                        uploader: '@Url.Action("upload")',
-                        'fileTypeDesc': 'Fastq Files',
-                        'fileTypeExts': '*.fastq,*.fq',
-                        method: 'post'
+                        init: {
+                            PostInit: function () {
+                                document.getElementById('filelist').innerHTML = '';
+                            },
+
+                            FilesAdded: function (up, files) {
+                                plupload.each(files, function (file) {
+
+                                    var html = '<div id="div_'+file.id+'"><p>' + file.name + ' (' + plupload.formatSize(file.size) + ')' + '</p>' +
+                                               '<div class="progress">' +
+                                               '<div class="progress-bar" id="' + file.id + '" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"> 0%' +
+                                               '</div></div></div>';
+
+                                    document.getElementById('filelist').innerHTML +=  html;
+                                    uploader.start();
+                                });
+                            },
+
+                            UploadProgress: function (up, file) {
+                                $("#" + file.id).attr("aria-valuenow", file.percent);
+                                $("#" + file.id).attr("style" , "width:"+file.percent+"%");
+                                $("#" + file.id).html(file.percent + "%");
+
+                                if( file.percent == 100)
+                                {
+                                    setInterval(function () {
+                                        $("#div_" + file.id).hide(100, function () {
+                                            location.reload();
+                                        });
+                                    }, 2000);
+                                }
+                                //document.getElementById(file.id).getElementsByTagName('b')[0].innerHTML = '<span>' + file.percent + "%</span>";
+                            },
+
+                            Error: function (up, err) {
+                                alert('['+err.code+']'+err.message);
+                            }
+                        }
                     });
+
+                    uploader.init();
                 });
-            </script>
-            <input type="file" id="file_upload_1" />
+
+        </script>
+        <div id="filelist">Your browser doesn't have Flash, Silverlight or HTML5 support.</div>
+        <br />
+
+        <div id="container">
+            <a id="pickfiles" href="javascript:;" class="btn btn-info">[Select files]</a>
         </div>
     </div>
 </div>
-
 <hr />
 
 <div class="row">
@@ -50,7 +100,7 @@
                     </td>
                     <td>
                         Status
-                    </td> 
+                    </td>
                     <td>
                         Create Time
                     </td>
@@ -62,7 +112,7 @@
             <tbody>
                 @foreach (var m in Model)
                 {
-                    <tr> 
+                    <tr>
                         <td>
                             @m.Name
                         </td>
@@ -77,7 +127,7 @@
                         </td>
                         <td>
 
-                            @if(m.State == 2)
+                            @if (m.State == 2)
                             {
                                 <a href="@Url.Action("create","Task" , new { inputs = m.RemotePath })" class="btn btn-info">Create Task</a>
                             }

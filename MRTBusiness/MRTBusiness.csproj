@@ -144,6 +144,7 @@
     <Compile Include="Controllers\MaratonController.cs" />
     <Compile Include="Controllers\PipeController.cs" />
     <Compile Include="Controllers\PipelineController.cs" />
+    <Compile Include="Controllers\ResumableController.cs" />
     <Compile Include="Controllers\ServantController.cs" />
     <Compile Include="Controllers\serviceController.cs" />
     <Compile Include="Controllers\TaskController.cs" />
@@ -174,6 +175,8 @@
     <Content Include="Content\font-awesome-ie7.min.css" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
+    <Content Include="Content\Huploadify.css" />
+    <Content Include="Content\swfupload.swf" />
     <Content Include="Content\uploadify-cancel.png" />
     <Content Include="Content\uploadify.css" />
     <Content Include="favicon.ico" />
@@ -224,7 +227,10 @@
     <Content Include="Images\tile\ribbon.png" />
     <Content Include="Images\waiting.png" />
     <Content Include="Images\warning.png" />
+    <Content Include="Scripts\jquery.Huploadify.js" />
+    <Content Include="Scripts\jquery.js" />
     <Content Include="Scripts\jquery.uploadify.min.js" />
+    <Content Include="Scripts\swfupload.js" />
     <Content Include="Scripts\uploadify.swf" />
     <Content Include="Scripts\angular-animate.js" />
     <Content Include="Scripts\angular-animate.min.js" />
@@ -329,6 +335,7 @@
     <Folder Include="Scripts\vendor\" />
     <Folder Include="Views\callback\" />
     <Folder Include="Views\Maraton\" />
+    <Folder Include="Views\Resumable\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

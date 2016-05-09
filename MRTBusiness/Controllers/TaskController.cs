@@ -49,6 +49,11 @@ namespace MRTBusiness.Controllers
             MaratonAPI api = new MaratonAPI();
             var ls = api.ServantList();
 
+            if( ls == null )
+            {
+                ls = new List<Message.MessageServantStateReply>();
+            }
+
             foreach (var item in ls)
             {
                 task.Servants.Add(item.id);
@@ -68,7 +73,7 @@ namespace MRTBusiness.Controllers
         {
             using (MDB db = new MDB())
             {
-                var task = db.Find<DbTask>(x => x.Id == id).FirstOrDefault();
+                var task = db.Find<DbTask>(x => x.Id == id && x.State == 0).FirstOrDefault();
                 if (task == null)
                 {
                     return RedirectToAction("index");

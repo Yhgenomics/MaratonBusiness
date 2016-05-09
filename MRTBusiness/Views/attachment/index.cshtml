@@ -16,13 +16,13 @@
                 $(document).ready(function () {
 
                     var uploader = new plupload.Uploader({
-                        runtimes: 'html5',
                         browse_button: 'pickfiles', // you can pass an id...
                         container: document.getElementById('container'), // ... or DOM Element itself
                         url: '@Url.Action("upload")',
-                        flash_swf_url: 'http://cdn.bootcss.com/plupload/2.1.8/Moxie.swf',
-                        method: 'post',
-                        chunk_size: '2mb',
+                        //flash_swf_url: '//cdn.bootcss.com/plupload/2.1.8/Moxie.swf',
+                        runtimes: 'html5',
+                        chunk_size: '1mb',
+                        //unique_names : true,
                         max_retries: 100,
                         filters: {
                             max_file_size: '2000mb',
@@ -40,13 +40,11 @@
 
                             FilesAdded: function (up, files) {
                                 plupload.each(files, function (file) {
-
                                     var html = '<div id="div_'+file.id+'"><p>' + file.name + ' (' + plupload.formatSize(file.size) + ')' + '</p>' +
                                                '<div class="progress">' +
                                                '<div class="progress-bar" id="' + file.id + '" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"> 0%' +
                                                '</div></div></div>';
-
-                                    document.getElementById('filelist').innerHTML +=  html;
+                                    document.getElementById('filelist').innerHTML += html;
                                     uploader.start();
                                 });
                             },
@@ -58,11 +56,13 @@
 
                                 if( file.percent == 100)
                                 {
-                                    setInterval(function () {
-                                        $("#div_" + file.id).hide(100, function () {
-                                            location.reload();
-                                        });
-                                    }, 2000);
+                                    $("#div_" + file.id).hide(100, function () {
+                                    });
+                                    //setInterval(function () {
+                                    //    $("#div_" + file.id).hide(100, function () {
+                                    //        location.reload();
+                                    //    });
+                                    //}, 2000);
                                 }
                                 //document.getElementById(file.id).getElementsByTagName('b')[0].innerHTML = '<span>' + file.percent + "%</span>";
                             },

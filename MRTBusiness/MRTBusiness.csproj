@@ -131,11 +131,13 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Code\Base64Decoder.cs" />
     <Compile Include="Code\HTMLExtention.cs" />
     <Compile Include="Code\MaratonAPI.cs" />
     <Compile Include="Code\MDB.cs" />
     <Compile Include="Code\MelotonAPI.cs" />
     <Compile Include="Code\Protocol.cs" />
+    <Compile Include="Code\YHFSClient.cs" />
     <Compile Include="Code\YHFSUploader.cs" />
     <Compile Include="Controllers\attachmentController.cs" />
     <Compile Include="Controllers\callbackController.cs" />
@@ -154,12 +156,14 @@
     </Compile>
     <Compile Include="Models\CFService.cs" />
     <Compile Include="Models\DbAttachment.cs" />
+    <Compile Include="Models\DbLog.cs" />
     <Compile Include="Models\DbModel.cs" />
     <Compile Include="Models\DbPipe.cs" />
     <Compile Include="Models\DbPipeline.cs" />
     <Compile Include="Models\DbStep.cs" />
     <Compile Include="Models\DbTask.cs" />
     <Compile Include="Models\DFSModel.cs" />
+    <Compile Include="Models\MaratonLog.cs" />
     <Compile Include="Models\MaratonResult.cs" />
     <Compile Include="Models\Pagination.cs" />
     <Compile Include="Models\VMHomeIndex.cs" />

@@ -11,6 +11,7 @@ namespace MRTBusiness.Models
         public string Name { get; set; }
         public string RemotePath { get; set; }
         public string Path { get; set; }
+        public Int64 Size { get; set; }
         public int State { get; set; }
 
         [BsonDateTimeOptions(Kind = DateTimeKind.Local)]

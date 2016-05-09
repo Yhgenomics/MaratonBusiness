@@ -10,7 +10,7 @@ namespace MRTBusiness.Controllers
 {
     public class MaratonController : Controller
     {
-        bool TryFinishTask(MaratonResult json , DbTask task , DbPipeline pipeline)
+        bool TryFinishTask(MaratonResult json, DbTask task, DbPipeline pipeline)
         {
             MaratonAPI api = new MaratonAPI();
             using (MDB mdb = new MDB())
@@ -64,7 +64,7 @@ namespace MRTBusiness.Controllers
                 task = mdb.Find<DbTask>(x => x.Id == json.taskid).FirstOrDefault();
                 pipeline = mdb.Find<DbPipeline>(x => x.Id == json.pipelineid).FirstOrDefault();
 
-                if( task == null || 
+                if (task == null ||
                     pipeline == null)
                 {
                     return;
@@ -90,6 +90,45 @@ namespace MRTBusiness.Controllers
                 {
                     newTask.State = 2;
                     mdb.UpdateOne<DbTask>(x => x.Id == newTask.Id, newTask);
+                }
+            }
+        }
+        [HttpPost]
+        public void log(MaratonLog json)
+        {
+            using (MDB mdb = new MDB())
+            {
+                DbLog log = mdb.Find<DbLog>(x => 
+                    x.TaskID == json.taskID && 
+                    x.SubtaskID == json.subtaskID && 
+                    x.ServantID == json.servantID).FirstOrDefault();
+
+                bool isNew = false;
+                if (log == null)
+                {
+                    isNew = true;
+                    log = new DbLog();
+                }
+
+                log.ErrorMask = json.errorMask;
+                if (log.ErrorMask != 0)
+                {
+                    return;
+                }
+                Base64Decoder b64d = new Base64Decoder();
+                byte[] encodingContent = b64d.GetDecoded(json.content);
+                log.Content = System.Text.ASCIIEncoding.Default.GetString(encodingContent);
+                log.TaskID = json.taskID;
+                log.SubtaskID = json.subtaskID;
+                log.ServantID = json.servantID;
+
+                if( isNew )
+                {
+                    mdb.Insert<DbLog>(log);
+                }
+                else
+                {
+                    mdb.UpdateOne<DbLog>(x => x.TaskID == log.TaskID, log);
                 }
             }
         }

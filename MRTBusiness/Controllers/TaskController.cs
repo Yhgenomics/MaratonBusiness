@@ -40,35 +40,80 @@ namespace MRTBusiness.Controllers
         [HttpPost]
         public ActionResult create(FormCollection form)
         {
-            DbTask task = new DbTask();
-            task.Name = form["Name"];
-            task.CreateTime = DateTime.Now;
-            task.Inputs.AddRange(form["Inputs"].Split(new string[] { "\r", "\n" }, StringSplitOptions.RemoveEmptyEntries));
-            task.Pipelines.AddRange(form["Pipelines"].Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries));
 
+            int createNum = 1;
+            int.TryParse(form["CreateNum"], out createNum);
             MaratonAPI api = new MaratonAPI();
             var ls = api.ServantList();
-
-            if( ls == null )
+            if (ls == null)
             {
                 ls = new List<Message.MessageServantStateReply>();
             }
 
-            foreach (var item in ls)
+            for (int i = 0; i < createNum; i++)
             {
-                task.Servants.Add(item.id);
-            }
-           
-            task.State = 0;
+                DbTask task = new DbTask();
+                task.Name = form["Name"] + "_" + (i + 1).ToString();
+                task.CreateTime = DateTime.Now;
+                task.Inputs.AddRange(form["Inputs"].Split(new string[] { "\r", "\n" }, StringSplitOptions.RemoveEmptyEntries));
+                task.Pipelines.AddRange(form["Pipelines"].Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries));
+                
+                foreach (var item in ls)
+                {
+                    task.Servants.Add(item.id);
+                }
 
-            using (MDB db = new MDB())
-            {
-                db.Insert<DbTask>(task);
+                task.State = 0;
+
+                using (MDB db = new MDB())
+                {
+                    db.Insert<DbTask>(task);
+                }
             }
 
             return RedirectToAction("index");
         }
 
+        public ActionResult startall()
+        {
+            using (MDB db = new MDB())
+            {
+                var task = db.Find<DbTask>(x => x.State == 0).ToList();
+                if (task == null)
+                {
+                    return RedirectToAction("index");
+                }
+
+                foreach (var t in task)
+                {
+                    var pipeline = db.Find<DbPipeline>(x => x.Id == t.Pipelines[0]).FirstOrDefault();
+
+                    if (pipeline == null)
+                    {
+                        return RedirectToAction("index");
+                    }
+
+                    MaratonAPI api = new MaratonAPI();
+                    var result = api.TaskDeliver(t, pipeline);
+
+                    if (result.code == 0)
+                    {
+                        t.ExecuteTime = DateTime.Now;
+                        t.State = 1;
+                        db.UpdateOne<DbTask>(x => x.Id == t.Id, t);
+                    }
+                    else
+                    {
+                        t.State = 2;
+                        db.UpdateOne<DbTask>(x => x.Id == t.Id, t);
+                    }
+                }
+
+                
+            }
+
+            return RedirectToAction("index");
+        }
         public ActionResult start(string id)
         {
             using (MDB db = new MDB())

@@ -96,6 +96,11 @@ namespace MRTBusiness.Controllers
         [HttpPost]
         public void log(MaratonLog json)
         {
+            if (json.errorMask != 0)
+            {
+                return;
+            }
+
             using (MDB mdb = new MDB())
             {
                 DbLog log = mdb.Find<DbLog>(x => 
@@ -111,10 +116,7 @@ namespace MRTBusiness.Controllers
                 }
 
                 log.ErrorMask = json.errorMask;
-                if (log.ErrorMask != 0)
-                {
-                    return;
-                }
+               
                 Base64Decoder b64d = new Base64Decoder();
                 byte[] encodingContent = b64d.GetDecoded(json.content);
                 log.Content = System.Text.ASCIIEncoding.Default.GetString(encodingContent);

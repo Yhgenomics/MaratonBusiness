@@ -78,7 +78,7 @@ namespace MRTBusiness.Controllers
         {
             using (MDB db = new MDB())
             {
-                var task = db.Find<DbTask>(x => x.State == 0).ToList();
+                var task = db.Find<DbTask>(x => x.State == 0 || x.State == 2).ToList();
                 if (task == null)
                 {
                     return RedirectToAction("index");

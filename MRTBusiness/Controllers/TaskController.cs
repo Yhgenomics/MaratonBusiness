@@ -16,7 +16,7 @@ namespace MRTBusiness.Controllers
             using (MDB db = new MDB())
             {
                 mod.CurrentPage = pageId.GetValueOrDefault();
-                mod.Tasks = db.Find<DbTask>(x => true).OrderByDescending(x=>x.Increase).Skip(mod.CurrentPage * mod.PageSize).Take(mod.PageSize).ToList();
+                mod.Tasks = db.Find<DbTask>(x => true).OrderByDescending(x => x.Increase).Skip(mod.CurrentPage * mod.PageSize).Take(mod.PageSize).ToList();
                 mod.TotalCount = db.Find<DbTask>(x => true).Count;
             }
 
@@ -57,7 +57,7 @@ namespace MRTBusiness.Controllers
                 task.CreateTime = DateTime.Now;
                 task.Inputs.AddRange(form["Inputs"].Split(new string[] { "\r", "\n" }, StringSplitOptions.RemoveEmptyEntries));
                 task.Pipelines.AddRange(form["Pipelines"].Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries));
-                
+
                 foreach (var item in ls)
                 {
                     task.Servants.Add(item.id);
@@ -108,8 +108,6 @@ namespace MRTBusiness.Controllers
                         db.UpdateOne<DbTask>(x => x.Id == t.Id, t);
                     }
                 }
-
-                
             }
 
             return RedirectToAction("index");
@@ -133,13 +131,49 @@ namespace MRTBusiness.Controllers
 
                 MaratonAPI api = new MaratonAPI();
                 var result = api.TaskDeliver(task, pipeline);
-               
+
                 if (result.code == 0)
                 {
                     task.ExecuteTime = DateTime.Now;
                     task.State = 1;
                     db.UpdateOne<DbTask>(x => x.Id == id, task);
-                } 
+                }
+                else
+                {
+                    task.State = 2;
+                    db.UpdateOne<DbTask>(x => x.Id == id, task);
+                }
+            }
+
+            return RedirectToAction("index");
+        }
+
+        public ActionResult restart(string id)
+        {
+            using (MDB db = new MDB())
+            {
+                var task = db.Find<DbTask>(x => x.Id == id && x.State == 305).FirstOrDefault();
+                if (task == null)
+                {
+                    return RedirectToAction("index");
+                }
+
+                var pipeline = db.Find<DbPipeline>(x => x.Id == task.Pipelines[0]).FirstOrDefault();
+
+                if (pipeline == null)
+                {
+                    return RedirectToAction("index");
+                }
+
+                MaratonAPI api = new MaratonAPI();
+                var result = api.TaskDeliver(task, pipeline);
+
+                if (result.code == 0)
+                {
+                    task.ExecuteTime = DateTime.Now;
+                    task.State = 1;
+                    db.UpdateOne<DbTask>(x => x.Id == id, task);
+                }
                 else
                 {
                     task.State = 2;
@@ -170,8 +204,20 @@ namespace MRTBusiness.Controllers
                     return View(new DbTask());
 
                 return View(task);
-                
+
             }
         }
+
+        public ActionResult log(string id)
+        {
+            using (MDB db = new MDB())
+            {
+                var task = db.Find<DbLog>(x => x.TaskID == id).OrderByDescending(x => x.Increase).ToList();
+                return View(task);
+            }
+
+            return View();
+        }
     }
+
 }

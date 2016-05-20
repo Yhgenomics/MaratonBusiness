@@ -72,11 +72,13 @@
 
                             @if (item.State == 303)
                             {
+                                <a class="btn btn-info" target="_blank" href="@Url.Action("log", new { id = item.Id })">Log</a>
                                 <button class="btn btn-success" href="javascript:void(0)" data-url="@Url.Action("result", new { id = item.Id })" data-toggle="modal" data-target="#resultView">Result</button>
                             }
 
                             @if (item.State == 305)
                             {
+                                <a class="btn btn-info" target="_blank" href="@Url.Action("log", new { id = item.Id })">Log</a>
                                 <a class="btn btn-info" href="@Url.Action("restart", new { id = item.Id })">Restart</a>
                             }
 
@@ -88,7 +90,6 @@
         <hr />
 
         @Html.CreatePaginatio(Url, Model, "index", "Task")
-
 
         <div class="modal fade" id="resultView" tabindex="-1" role="dialog" aria-labelledby="resultView">
             <div id="resultViewDoc" role="document">

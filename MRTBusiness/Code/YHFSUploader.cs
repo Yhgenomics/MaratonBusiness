@@ -41,30 +41,9 @@ namespace MRTBusiness.Code
                         }
 
                         YHFSClient client = new YHFSClient();
-                        client.Upload(f.RemotePath, f.Path);
+                        string log = client.Upload(f.RemotePath, f.Path);
 
-                        //string args = string.Format("-m p -a {0} -p {1} -r {2} -l {3}",
-                        //    "10.0.0.11",
-                        //    "112",
-                        //    f.RemotePath,
-                        //    f.Path);
-
-                        //var fileName = System.Web.HttpRuntime.AppDomainAppPath + "Exe/meloton";
-
-                        ////System.IO.File.WriteAllText("/wwwroot/maratonbus/log.log", "");
-                        ////System.IO.File.AppendAllText("/wwwroot/maratonbus/log.log", fileName + "\r\n");
-                        ////System.IO.File.AppendAllText("/wwwroot/maratonbus/log.log", args + "\r\n");
-
-                        //process = new Process();
-                        //process.StartInfo.FileName = fileName;
-                        //process.StartInfo.Arguments = args;
-                        //process.StartInfo.UseShellExecute = false;   // 是否使用外壳程序 
-                        //process.StartInfo.CreateNoWindow = true;   //是否在新窗口中启动该进程的值 
-                        //process.StartInfo.RedirectStandardOutput = true;
-                        //process.Start();
-                        //process.WaitForExit();
-
-                        //System.IO.File.AppendAllText("/wwwroot/maratonbus/log.log", process.StandardOutput.ReadToEnd());
+                        System.IO.File.AppendAllText("/wwwroot/maratonbus/log.log", log);
 
                         using (MDB mdb = new MDB())
                         {

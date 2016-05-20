@@ -331,6 +331,7 @@
     <Content Include="Views\Task\servantlist.cshtml" />
     <Content Include="Views\test\index.cshtml" />
     <Content Include="Views\attachment\index.cshtml" />
+    <Content Include="Views\Task\log.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

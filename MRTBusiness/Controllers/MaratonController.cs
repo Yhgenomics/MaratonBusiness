@@ -130,7 +130,10 @@ namespace MRTBusiness.Controllers
                 }
                 else
                 {
-                    mdb.UpdateOne<DbLog>(x => x.TaskID == log.TaskID, log);
+                    mdb.UpdateOne<DbLog>(x => 
+                            x.TaskID == json.taskID &&
+                            x.SubtaskID == json.subtaskID &&
+                            x.ServantID == json.servantID , log);
                 }
             }
         }

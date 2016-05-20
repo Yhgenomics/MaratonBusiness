@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MRTBusiness.Models;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -13,12 +14,16 @@ namespace MRTBusiness.Code
 
         public string Upload(string remote, string local)
         {
+            var cfg = CFService.Config();
             Process process = null;
             string args = string.Format("-m p -a {0} -p {1} -r {2} -l {3}",
                 MasterAddr,
                 MasterPort,
                 remote,
                 local);
+
+            var log = System.Web.HttpRuntime.AppDomainAppPath + "Exe/log.log";
+            System.IO.File.WriteAllText(log, args);
 
             var fileName = System.Web.HttpRuntime.AppDomainAppPath + "Exe/meloton";
              
@@ -36,8 +41,9 @@ namespace MRTBusiness.Code
 
         public string Download(string remote, string local)
         {
+            var cfg = CFService.Config();
             Process process = null;
-            string args = string.Format("-m g -a {0} -p {1} -r {2} -l {3}",
+            string args = string.Format("-m p -a {0} -p {1} -r {2} -l {3}",
                 MasterAddr,
                 MasterPort,
                 remote,

@@ -1,0 +1,36 @@
+﻿@model List<MRTBusiness.Models.DbLog>
+@{
+    ViewBag.Title = "index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="panel-group" id="accordion">
+
+    @if (Model != null)
+    {
+        var sids = Model.Select(x => x.ServantID).Distinct().ToList();
+        <div class="panel panel-default">
+            @foreach (var sid in sids)
+            {
+                var cid = Guid.NewGuid().ToString().Replace("-", "");
+                var contents = Model.Where(x => x.ServantID == sid).ToList();
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion"
+                           href="#c_@cid">
+                            @sid
+                        </a>
+                    </h4>
+                </div>
+                <div id="c_@cid" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        @foreach (var item in contents)
+                        {
+                            @MvcHtmlString.Create(item.Content.Replace("\n", "<br/>"))
+                        }
+                    </div>
+                </div>
+            }
+        </div>
+    }
+</div>

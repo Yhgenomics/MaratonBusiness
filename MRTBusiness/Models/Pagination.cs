@@ -9,7 +9,7 @@ namespace MRTBusiness.Models
     {
         public Pagination()
         {
-            PageSize = 10;
+            PageSize = 20;
             HasNextPage = true;
             HasPreviewPage = true;
         }

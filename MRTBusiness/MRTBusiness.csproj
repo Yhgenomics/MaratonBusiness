@@ -171,6 +171,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\awesomeStyle\awesome.css" />
+    <Content Include="Content\awesomeStyle\img\loading.gif" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\flat-ui.css" />
@@ -183,6 +185,21 @@
     <Content Include="Content\swfupload.swf" />
     <Content Include="Content\uploadify-cancel.png" />
     <Content Include="Content\uploadify.css" />
+    <Content Include="Content\zTreeStyle\img\diy\1_close.png" />
+    <Content Include="Content\zTreeStyle\img\diy\1_open.png" />
+    <Content Include="Content\zTreeStyle\img\diy\2.png" />
+    <Content Include="Content\zTreeStyle\img\diy\3.png" />
+    <Content Include="Content\zTreeStyle\img\diy\4.png" />
+    <Content Include="Content\zTreeStyle\img\diy\5.png" />
+    <Content Include="Content\zTreeStyle\img\diy\6.png" />
+    <Content Include="Content\zTreeStyle\img\diy\7.png" />
+    <Content Include="Content\zTreeStyle\img\diy\8.png" />
+    <Content Include="Content\zTreeStyle\img\diy\9.png" />
+    <Content Include="Content\zTreeStyle\img\line_conn.gif" />
+    <Content Include="Content\zTreeStyle\img\loading.gif" />
+    <Content Include="Content\zTreeStyle\img\zTreeStandard.gif" />
+    <Content Include="Content\zTreeStyle\img\zTreeStandard.png" />
+    <Content Include="Content\zTreeStyle\zTreeStyle.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -234,6 +251,8 @@
     <Content Include="Scripts\jquery.Huploadify.js" />
     <Content Include="Scripts\jquery.js" />
     <Content Include="Scripts\jquery.uploadify.min.js" />
+    <Content Include="Scripts\jquery.ztree.all.min.js" />
+    <Content Include="Scripts\jquery.ztree.core.min.js" />
     <Content Include="Scripts\swfupload.js" />
     <Content Include="Scripts\uploadify.swf" />
     <Content Include="Scripts\angular-animate.js" />
@@ -280,6 +299,8 @@
     <Content Include="Scripts\angular-touch.min.js.map" />
     <Content Include="Scripts\angular.min.js.map" />
     <Content Include="Scripts\errors.json" />
+    <Content Include="Content\awesomeStyle\awesome.less" />
+    <Content Include="Content\awesomeStyle\fa.less" />
     <None Include="Properties\PublishProfiles\MRTBusiness.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\Chart.js" />

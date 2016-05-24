@@ -4,99 +4,61 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<link href="~/Content/zTreeStyle/zTreeStyle.css" rel="stylesheet" />
+<script src="~/Scripts/jquery.ztree.core.min.js"></script>
+<script src="~/Scripts/jquery.zeroclipboard.min.js"></script>
+<script>
+    var setting = {
+        async: {
+            enable: true,
+            url: "@Url.Action("treedata")",
+            autoParam: ["id", "name=n", "level=lv" , "path=p"],
+            otherParam: { "otherParam": "zTreeAsyncTest" },
+            dataFilter: filter
+        },
+        callback: {
+            onClick: zTreeOnClick
+         }
+    };
+    function zTreeOnClick(event, treeId, treeNode) {
+        if (treeNode.isParent) return false;
+        $("#fileDetail").data("path", treeNode.path);
+        $("#fileDetail").modal();
+
+    };
+    function filter(treeId, parentNode, childNodes) {
+        if (!childNodes) return null;
+        var ret = [];
+        for (var i = 0, l = childNodes.Dir.length; i < l; i++) {
+            ret.push({ id : 1 , name:childNodes.Dir[i].Path , isParent: true , path : childNodes.Path});
+            //childNodes[i].name = childNodes.Dir[i].Path;
+        }
+
+        for (var i = 0, l = childNodes.File.length; i < l; i++) {
+            var n = childNodes.File[i].Path.replace(/^.*\/|\..*$/, "");
+            ret.push({ id: 1, name: n, isParent: false, path: childNodes.File[i].Path });
+            //childNodes[i].name = childNodes.Dir[i].Path;
+        }
+        return ret;
+    }
+
+    $(document).ready(function () {
+        $.fn.zTree.init($("#treeDemo"), setting);
+        $("body")
+                 .on("copy", ".zclip", function (/* ClipboardEvent */ e) {
+                     e.clipboardData.clearData();
+                     e.clipboardData.setData("text/plain", $(this).data("zclip-text"));
+                     e.preventDefault();
+                 });
+    });
+</script>
+
 <div class=".container-fluid body-content">
     <div class="row">
         <div class="col-md-12">
-            @if ( this.Request.Params["path"] == null ||
-                  this.Request.Params["path"] == "/")
-            {
-                <ol class="breadcrumb">
-                    <li><a href="@Url.Action("index", "dfs", new { path = "/" })">root</a></li>
-                </ol>
-            }
-            else
-            {
-                var split = new List<string>(this.Request.Params["path"].Split(new string[] { "/" }, StringSplitOptions.RemoveEmptyEntries));
-                split.Insert(0, "/");
-                var path = "";
-
-                <ol class="breadcrumb">
-                    @foreach (var item in split)
-                    {
-                        path += item;
-
-                        if (item == "/")
-                        {
-                            <li><a href="@Url.Action("index", "dfs", new { path = "/"  })">root</a></li>
-                        }
-                        else
-                        {
-                            <li><a href="@Url.Action("index", "dfs", new { path = path+"/" })">@item</a></li>
-                        }
-                    }
-                </ol>
-            }
+            <ul id="treeDemo" class="ztree"></ul>
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-4">
-            <div class="list-group">
-                <a href="#" class="list-group-item active">
-                    Directory
-                </a>
-
-                @if (this.Request.Params["path"] == null ||
-                  this.Request.Params["path"] == "/")
-                {
-
-                }
-                else
-                {
-                    var split = new List<string>(this.Request.Params["path"].Split(new string[] { "/" }, StringSplitOptions.RemoveEmptyEntries));
-                    split.Insert(0, "/");
-                    split.RemoveAt(split.Count - 1);
-                    var path = "";
-
-                    foreach (var item in split)
-                    {
-                        path += item;
-                    }
-
-                    if (path == "/")
-                    {
-                        <a href="@Url.Action("index", "dfs", new { path = path })" class="list-group-item">...</a>
-                    }
-                    else
-                    {
-                        <a href="@Url.Action("index", "dfs", new { path = path + "/" })" class="list-group-item">...</a>
-                    }
-                }
-
-
-                @foreach (var item in Model.Dir)
-                {
-                    <a href="@Url.Action("index", "dfs", new { path = this.Request.Params["path"] + item.Path + "/" })" class="list-group-item">@item.Path</a>
-                }
-
-            </div>
-        </div>
-
-        <div class="col-md-8">
-            <div class="list-group">
-
-                <a href="#" class="list-group-item active">
-                    Files
-                </a>
-
-                @foreach (var item in Model.File)
-                {
-                    <a data-toggle="modal" data-target="#fileDetail" data-path="@item.Path" class="list-group-item"><span class="badge">@(item.Size / (1024 * 1024))MB</span> @Path.GetFileName(item.Path) </a>
-                }
-
-            </div>
-        </div>
-    </div>
-     
 </div>
 
 <div class="modal fade" id="fileDetail" tabindex="-1" role="dialog" aria-labelledby="fileDetail">
@@ -118,10 +80,11 @@
 <script>
     $(document).ready(function () {
         $("#fileDetail").on('show.bs.modal', function (e) {
-            var obj = $(e.relatedTarget);
+            var obj = $(e.currentTarget);
             $.get("@Url.Action("FileDetail")", { path: obj.data("path") }, function (data, status, jxhr) {
                 $("#fileDetailContent").html(data);
             });
         }) 
     });
 </script>
+

@@ -8,6 +8,7 @@ using System.Web.Mvc;
 
 namespace MRTBusiness.Controllers
 {
+    
     public class dfsController : Controller
     {
         string queryJson(string url)
@@ -26,6 +27,44 @@ namespace MRTBusiness.Controllers
             string result = wc.DownloadString("http://" + ip + ":" + port + url);
 
             return result;
+        }
+
+        public JsonResult treedata( string id , string n , string lv , string p)
+        {
+            //            var nodes = [
+            //    { id: 1, pId: 0, name: "父节点1"},
+            //	{ id: 11, pId: 1, name: "子节点1"},
+            //	{ id: 12, pId: 1, name: "子节点2"}
+            //];
+            string pPath = p;
+            string path = n;
+
+            if ( string.IsNullOrEmpty(pPath))
+            {
+                pPath = "/";
+            }
+
+            path = pPath + n;
+
+            if (path.StartsWith("/") == false) path = "/" + path;
+            if (path.EndsWith("/") == false) path = path + "/";
+
+            var jsonstr = queryJson("/v1/dir?path=" + path);
+
+            try
+            {
+                var result = Newtonsoft.Json.JsonConvert.DeserializeObject<Models.DFSDir>(jsonstr);
+                if (result == null)
+                    result = new Models.DFSDir();
+
+                return Json(new {  Dir= result.Dir , File= result.File , Path = path });
+
+            }
+            catch (Exception eee)
+            {
+                Debug.Print(eee.Message);
+            }
+            return Json(null);
         }
 
         public void query(string url)

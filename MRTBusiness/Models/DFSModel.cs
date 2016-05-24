@@ -26,9 +26,9 @@ namespace MRTBusiness.Models
             this.File = new List<DFSDirFile>();
         }
 
-        public IEnumerable<DFSDirInfo> Dir { get; set; }
+        public List<DFSDirInfo> Dir { get; set; }
         public Int64 Dircount { get; set; }
-        public IEnumerable<DFSDirFile> File { get; set; }
+        public List<DFSDirFile> File { get; set; }
         public Int64 Filecount { get; set; }
     }
     #endregion
@@ -46,7 +46,7 @@ namespace MRTBusiness.Models
             this.Node = new List<DFSFileNode>();
         }
 
-        public IEnumerable<DFSFileNode> Node { get; set; }
+        public List<DFSFileNode> Node { get; set; }
         public int Nodecount { get; set; }
         public int Partid { get; set; }
         public Int64 Size { get; set; }

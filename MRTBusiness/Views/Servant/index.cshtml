@@ -3,6 +3,9 @@
     ViewBag.Title = "index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+<script src="//cdn.hcharts.cn/highcharts/highcharts.js" ></script>
+
 <ol class="breadcrumb">
     <li><a href="/">Home</a></li>
     <li><a href="@Url.Action("index","Servant")">Servant</a></li>
@@ -20,7 +23,7 @@
                         Status
                     </td>
                     <td>
-                        CPU
+                        CPU Core
                     </td>
                     <td>
                         Memory
@@ -35,7 +38,7 @@
                             @m.id
                         </td>
                         <td>
-                            @m.state
+                            @Html.CreateStateIcon(m.state)
                         </td>
                         <td>
                             @m.cpu
@@ -48,4 +51,106 @@
             </tbody>
         </table>
     </div>
+    <div id="cpuload_charts" class="col-lg-12">
+
+    </div>
+
+    <div id="mem_charts" class="col-lg-12">
+
+    </div>
 </div>
+
+<script>
+    function createCharts(id, title, onLoad, data) {
+        $('#' + id).highcharts({
+            chart: {
+                type: 'line',
+                animation: false, // don't animate in old IE
+                events: {
+                    load: onLoad
+                    /*function () {
+                    // set up the updating of the chart each second
+                    var series = this.series[0];
+                    setInterval(function () {
+                        var x = (new Date()).getTime(), // current time
+                            y = Math.random();
+                        series.addPoint([x, y], true, true);
+                    }, 1000);
+                }*/
+                }
+            },
+            title: {
+                text: title
+            },
+            xAxis: {
+                type: 'datetime',
+                tickPixelInterval: 1000
+            },
+            yAxis: {
+                title: {
+                    text: 'Load'
+                }
+            },
+            tooltip: {
+                formatter: function () {
+                    return '<b>' + this.series.name + '</b><br/>' +
+                    Highcharts.dateFormat('%Y-%m-%d %H:%M:%S', this.x) + '<br/>' +
+                    Highcharts.numberFormat(this.y, 2);
+                }
+            },
+            legend: {
+                enabled: false
+            },
+            exporting: {
+                enabled: false
+            },
+            series: data
+        });
+    }
+
+    $(document).ready(function () {
+       
+
+        $.post("@Url.Action("state")", "", function (data) {
+
+
+            for (var i = 0; i < data.mem.length; i++) {
+                data.mem[i].data[0].x = (new Date()).getTime();
+                data.cpu[i].data[0].x = (new Date()).getTime();
+
+            }
+
+            createCharts("mem_charts", "Memory", function () {
+                // set up the updating of the chart each second
+                var serArr = this.series;
+                setInterval(function () {
+
+                    $.post("@Url.Action("state")", "", function (data) {
+                        for (var i = 0; i < serArr.length; i++) {
+                            var x = (new Date()).getTime(), // current time
+                            y = data.mem[i].data[0].y;
+                            serArr[i].addPoint([x, y], true, serArr[i].points.length > 30);
+                        }
+                    });
+                }, 1000);
+            }, data.mem);
+
+            createCharts("cpuload_charts", "CPU", function () {
+                // set up the updating of the chart each second
+                var serArr = this.series;
+                setInterval(function () {
+                    $.post("@Url.Action("state")", "", function (data) {
+                        for (var i = 0; i < serArr.length; i++) {
+                            var x = (new Date()).getTime(), // current time
+                            y = data.cpu[i].data[0].y;
+                            serArr[i].addPoint([x, y], true, serArr[i].points.length > 30);
+                        }
+                    });
+                }, 1000);
+            }, data.cpu);
+        });
+
+
+    });
+
+</script>

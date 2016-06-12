@@ -28,9 +28,19 @@ namespace System.Web.Mvc
                         ret = "<img width='35' src='/Images/sequence.png' />";
                     }
                     break;
+                case 101:
+                    {
+                        ret = "<img width='35' src='/Images/sequence.png' />";
+                    }
+                    break;
+                case 102:
+                    {
+                        ret = "<img width='35' src='/Images/waiting.png' />";
+                    }
+                    break;
                 case 302:
                     {
-                        ret = "<img src='' />";
+                        ret = "<img width='35' src='/Images/processing.png' />";
                     }
                     break;
                 case 303:

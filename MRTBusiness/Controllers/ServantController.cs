@@ -15,25 +15,6 @@ namespace MRTBusiness.Controllers
         {
             MaratonAPI api = new MaratonAPI();
             var mod = api.ServantList();
-
-            //using (MDB mdb = new MDB())
-            //{
-            //    foreach (var item in mod)
-            //    {
-            //        DbServant dbs = new DbServant();
-            //        dbs.cpu = item.cpu;
-            //        dbs.Id = item.id;
-            //        dbs.memory = item.memory;
-            //        dbs.state = item.state;
-            //        dbs.type = item.type;
-
-            //        mdb.UpdateOne<DbServant>(dbs);
-            //    }
-
-            //    var ret = mdb.Find<DbServant>(x=>true).ToArray();
-            //    return View(ret);
-            //}
-
             return View(mod);
         }
 

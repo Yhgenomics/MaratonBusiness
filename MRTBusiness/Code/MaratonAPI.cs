@@ -9,7 +9,7 @@ namespace MRTBusiness.Code
 {
     public class MaratonAPI
     {
-        string ip = "10.0.0.219";
+        string ip = "10.0.0.11";
         int port = 91;
 
         string PostData(string url , string json)

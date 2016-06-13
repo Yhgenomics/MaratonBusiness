@@ -44,7 +44,7 @@
                             @m.cpu
                         </td>
                         <td>
-                            @m.sysinfo_mem_uesed
+                            @(m.sysinfo_mem_total - m.sysinfo_mem_uesed)
                         </td>
                     </tr>
                 }
@@ -107,7 +107,7 @@
                 data.cpu[i].data[0].x = (new Date()).getTime();
             }
 
-            createCharts("mem_charts", "Memory","%", function () {
+            createCharts("mem_charts", "Memory","MB", function () {
                 // set up the updating of the chart each second
                 var serArr = this.series;
                 setInterval(function () {
@@ -121,7 +121,7 @@
                 }, 1000);
             }, data.mem);
 
-            createCharts("cpuload_charts", "CPU", "MB" , function () {
+            createCharts("cpuload_charts", "CPU", "%" , function () {
                 // set up the updating of the chart each second
                 var serArr = this.series;
                 setInterval(function () {

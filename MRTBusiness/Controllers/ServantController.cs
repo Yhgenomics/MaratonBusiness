@@ -29,7 +29,7 @@ namespace MRTBusiness.Controllers
 
             foreach (var item in rep)
             {
-                cpus.Add(new { name = item.id , data = new List<object>() { new { x = ""  ,  y = item.sysinfo_cpu_user }  } });
+                cpus.Add(new { name = item.id , data = new List<object>() { new { x = ""  ,  y = (item.sysinfo_load_1min / item.sysinfo_cpu_num) * 100 }  } });
                 mems.Add(new { name = item.id, data = new List<object>() { new { x = ""  ,  y = item.sysinfo_mem_uesed } } });
             }
 

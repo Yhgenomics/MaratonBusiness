@@ -4,7 +4,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<script src="//cdn.hcharts.cn/highcharts/highcharts.js" ></script>
+<script src="//cdn.hcharts.cn/highcharts/highcharts.js"></script>
 
 <ol class="breadcrumb">
     <li><a href="/">Home</a></li>
@@ -44,7 +44,7 @@
                             @m.cpu
                         </td>
                         <td>
-                            @m.memory
+                            @m.sysinfo_mem_uesed
                         </td>
                     </tr>
                 }
@@ -61,22 +61,13 @@
 </div>
 
 <script>
-    function createCharts(id, title, onLoad, data) {
+    function createCharts(id, title, ytitle, onLoad, data) {
         $('#' + id).highcharts({
             chart: {
                 type: 'line',
                 animation: false, // don't animate in old IE
                 events: {
-                    load: onLoad
-                    /*function () {
-                    // set up the updating of the chart each second
-                    var series = this.series[0];
-                    setInterval(function () {
-                        var x = (new Date()).getTime(), // current time
-                            y = Math.random();
-                        series.addPoint([x, y], true, true);
-                    }, 1000);
-                }*/
+                    load: onLoad 
                 }
             },
             title: {
@@ -88,7 +79,7 @@
             },
             yAxis: {
                 title: {
-                    text: 'Load'
+                    text: ytitle
                 }
             },
             tooltip: {
@@ -109,22 +100,17 @@
     }
 
     $(document).ready(function () {
-       
 
         $.post("@Url.Action("state")", "", function (data) {
-
-
             for (var i = 0; i < data.mem.length; i++) {
                 data.mem[i].data[0].x = (new Date()).getTime();
                 data.cpu[i].data[0].x = (new Date()).getTime();
-
             }
 
-            createCharts("mem_charts", "Memory", function () {
+            createCharts("mem_charts", "Memory","%", function () {
                 // set up the updating of the chart each second
                 var serArr = this.series;
                 setInterval(function () {
-
                     $.post("@Url.Action("state")", "", function (data) {
                         for (var i = 0; i < serArr.length; i++) {
                             var x = (new Date()).getTime(), // current time
@@ -135,7 +121,7 @@
                 }, 1000);
             }, data.mem);
 
-            createCharts("cpuload_charts", "CPU", function () {
+            createCharts("cpuload_charts", "CPU", "MB" , function () {
                 // set up the updating of the chart each second
                 var serArr = this.series;
                 setInterval(function () {

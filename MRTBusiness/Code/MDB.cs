@@ -49,9 +49,34 @@ namespace MRTBusiness.Code
             var doc = this.Document<T>();
             doc.InsertMany(instance);
             return true;
-        }
+        } 
 
         public T UpdateOne<T>(Expression<Func<T, bool>> filter, T instance ) where T : DbModel
+        {
+            if (instance == null)
+                return null;
+
+            var doc = this.Document<T>();
+
+            List<UpdateDefinition<T>> updates = new List<UpdateDefinition<T>>();
+            MongoDB.Driver.UpdateDefinitionBuilder<T> builder = new UpdateDefinitionBuilder<T>();
+
+            Type t = instance.GetType();
+            var ps = t.GetProperties(BindingFlags.Instance | BindingFlags.Public);
+
+            foreach (var p in ps)
+            {
+                if (p.Name == "Id")
+                    continue;
+                updates.Add(builder.Set(p.Name, p.GetValue(instance)));
+            }
+
+            doc.UpdateOne(filter, builder.Combine(updates));
+
+            return instance;
+        }
+
+        public T UpdateOne<T>(T instance) where T : DbModel
         {
             if (instance == null)
                 return null;
@@ -72,7 +97,7 @@ namespace MRTBusiness.Code
                 updates.Add(builder.Set(p.Name, p.GetValue(instance)));
             }
 
-            doc.UpdateOne(filter, builder.Combine(updates));
+            doc.UpdateOne<T>( x=>x.Id == instance.Id , builder.Combine(updates));
 
             return instance;
         }

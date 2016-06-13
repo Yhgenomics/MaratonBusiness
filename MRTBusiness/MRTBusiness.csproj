@@ -160,6 +160,7 @@
     <Compile Include="Models\DbModel.cs" />
     <Compile Include="Models\DbPipe.cs" />
     <Compile Include="Models\DbPipeline.cs" />
+    <Compile Include="Models\DbServant.cs" />
     <Compile Include="Models\DbStep.cs" />
     <Compile Include="Models\DbTask.cs" />
     <Compile Include="Models\DFSModel.cs" />
